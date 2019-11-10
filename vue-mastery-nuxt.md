@@ -27,6 +27,8 @@
 
 > Not only does Nuxt come preconfigured with Vuex, Vue Router, and Vue-Meta, but it sets your project up with intelligent defaults based on well researched best practices that Vue won’t give you out of the box.
 >
+> Creating a Nuxt app is as easy as typing: `$ npx create-nuxt-app <project-name>`
+>
 > The Nuxt Starter Kit will ask you for the libraries you want to start your project with, such as CSS Lint, and which CSS framework to use.
 
 #### Problem #2: No standard folder structure
