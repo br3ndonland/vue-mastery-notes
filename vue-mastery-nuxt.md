@@ -133,6 +133,38 @@
 
 ### 8. Using Vuex
 
+- Nuxt has some extra lifecycle hooks, such as `fetch`.
+- Nuxt has all the modules [namespaced](https://vuex.vuejs.org/guide/modules.html#namespacing) by default.
+- We also use `mapState` here, which is a handy way to access the Vuex store.
+
+  ```js
+  import EventCard from '@/components/EventCard.vue'
+  import { mapState } from 'vuex'  // <--- To map event
+  export default {
+    ...
+    async fetch({ store, error }) {
+      try {
+        await store.dispatch('events/fetchEvents')
+      } catch (e) {
+    ...
+    },
+    computed: mapState({
+      events: state => state.events.events
+    })
+  }
+  ```
+
 ### 9. Universal mode deployment
 
+- They use Heroku for this lesson.
+- [my-json-server](https://my-json-server.typicode.com/) seems great. Would have been helpful for [udacity-google-mws](https://github.com/br3ndonland/udacity-google-mws).
+
 ### 10. Static site generated deployment
+
+- We use Netlify in this lesson.
+- Universal mode is great when there's a large amount of dynamic content, like a stock ticker.
+- Static site deployment generates the HTML once.
+
+**COURSE COMPLETE!!! I RULE!!!**
+
+<img src="img/vue-mastery-nuxt-complete.png" alt="Vue Mastery Scaling Vue with Nuxt course completion page" width="600px" />
