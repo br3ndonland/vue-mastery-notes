@@ -79,7 +79,30 @@
 
 ### 2. Creating a Nuxt app
 
+- `npx create-nuxt-app <project-name>`
+- Nuxt does a great job of separating container and presentational components, which was an early application design pattern in React. Listen to [Full Stack Radio episode 122](http://www.fullstackradio.com/122) 20190828 with Matt Biilmann from Netlify.
+
+  <img src="img/vm-nuxt-02-01.jpg" alt="Nuxt component structure" width="600px" />
+
+- Overall Nuxt folder structure:
+
+  <img src="img/vm-nuxt-02-02.jpg" alt="Overall Nuxt folder structure" width="600px" />
+
 ### 3. Universal mode
+
+- **Universal mode** is basically **Server-Side Rendering (SSR)**.
+- Client-side single-page apps:
+
+  <img src="img/vm-nuxt-03-spa.jpg" alt="Vue client-side single-page apps" width="600px" />
+
+- SSR apps:
+
+  <img src="img/vm-nuxt-03-ssr.jpg" alt="Vue apps with Server-Side Rendering (SSR)" width="600px" />
+
+- **Hydration**:
+  - An app with SSR performs the initial page load by returning only HTML for fast load times.
+  - After the client has received the app's JavaScript, it then "hydrates" the HTML so it behaves like a normal SPA.
+  - **This is another example of the progressive and approachable nature of Vue.js.** With React, I heard people throwing out terms like hydration from the very beginning, without defining those terms. With Vue.js, I haven't even needed to think about hydration until learning Nuxt.js at an advanced stage.
 
 ### 4. SEO with vue-meta
 
@@ -88,6 +111,25 @@
 ### 6. API calls with Axios
 
 ### 7. Async/Await & progress bar
+
+- I agree that nested promises are not readable.
+- The destructured Axios result was pretty sweet:
+
+  ```js
+  async asyncData({ $axios, error }) {
+    try {
+      const { data } = await $axios.get('http://localhost:3000/events')
+      return {
+        events: data
+      }
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch events events at this time'
+      })
+    }
+  }
+  ```
 
 ### 8. Using Vuex
 
