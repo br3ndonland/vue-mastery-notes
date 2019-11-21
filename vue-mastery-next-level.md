@@ -118,3 +118,5 @@ At [tag `progress-bar-start`](https://github.com/Code-Pop/real-world-vue/release
 - Code: [tag filters_FINISH](https://github.com/Code-Pop/real-world-vue/releases/tag/filters_FINISH)
 
 **COURSE COMPLETE!!! I RULE!!!**
+
+<img src="img/vm-next-level-complete.png" alt="Vue Mastery Next-Level Vue course completion page" width="600px" />
