@@ -167,4 +167,4 @@
 
 **COURSE COMPLETE!!! I RULE!!!**
 
-<img src="img/vue-mastery-nuxt-complete.png" alt="Vue Mastery Scaling Vue with Nuxt course completion page" width="600px" />
+<img src="img/vm-nuxt-complete.png" alt="Vue Mastery Scaling Vue with Nuxt course completion page" width="600px" />
