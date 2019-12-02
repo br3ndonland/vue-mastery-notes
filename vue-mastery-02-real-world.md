@@ -8,18 +8,18 @@ Instructor: Adam Jahr
 
 ## Table of Contents <!-- omit in toc -->
 
-- [1. Intro to Real World Vue](#1-Intro-to-Real-World-Vue)
-- [2. Vue CLI 3 - Creating our Project](#2-Vue-CLI-3---Creating-our-Project)
-- [3. Optimizing your Editor](#3-Optimizing-your-Editor)
-- [4. Vue Router Basics](#4-Vue-Router-Basics)
-  - [Lesson](#Lesson)
-  - [Installing the event app](#Installing-the-event-app)
-  - [Running the event app](#Running-the-event-app)
-- [5. Dynamic Routing & History Mode](#5-Dynamic-Routing--History-Mode)
-- [6. Single File Vue Components](#6-Single-File-Vue-Components)
-- [7. Global Components](#7-Global-Components)
-- [8. Slots](#8-Slots)
-- [9. API calls with Axios](#9-API-calls-with-Axios)
+- [1. Intro to Real World Vue](#1-intro-to-real-world-vue)
+- [2. Vue CLI 3 - Creating our Project](#2-vue-cli-3---creating-our-project)
+- [3. Optimizing your Editor](#3-optimizing-your-editor)
+- [4. Vue Router Basics](#4-vue-router-basics)
+  - [Lesson](#lesson)
+  - [Installing the event app](#installing-the-event-app)
+  - [Running the event app](#running-the-event-app)
+- [5. Dynamic Routing & History Mode](#5-dynamic-routing--history-mode)
+- [6. Single File Vue Components](#6-single-file-vue-components)
+- [7. Global Components](#7-global-components)
+- [8. Slots](#8-slots)
+- [9. API calls with Axios](#9-api-calls-with-axios)
 
 ## 1. Intro to Real World Vue
 

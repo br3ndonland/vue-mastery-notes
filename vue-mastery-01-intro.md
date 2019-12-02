@@ -6,17 +6,17 @@ I really like how they have both videos and written notes. Great to cater to mul
 
 ## Table of Contents <!-- omit in toc -->
 
-- [01. The Vue Instance](#01-The-Vue-Instance)
-- [02. Attribute Binding](#02-Attribute-Binding)
-- [03. Conditional Rendering](#03-Conditional-Rendering)
-- [04. List Rendering](#04-List-Rendering)
-- [05. Event Handling](#05-Event-Handling)
-- [06. Class & Style Binding](#06-Class--Style-Binding)
-- [07. Computed Properties](#07-Computed-Properties)
-- [08. Components](#08-Components)
-- [09. Emitting Events](#09-Emitting-Events)
-- [10. Forms](#10-Forms)
-- [11. Tabs](#11-Tabs)
+- [01. The Vue Instance](#01-the-vue-instance)
+- [02. Attribute Binding](#02-attribute-binding)
+- [03. Conditional Rendering](#03-conditional-rendering)
+- [04. List Rendering](#04-list-rendering)
+- [05. Event Handling](#05-event-handling)
+- [06. Class & Style Binding](#06-class--style-binding)
+- [07. Computed Properties](#07-computed-properties)
+- [08. Components](#08-components)
+- [09. Emitting Events](#09-emitting-events)
+- [10. Forms](#10-forms)
+- [11. Tabs](#11-tabs)
 
 ## 01. The Vue Instance
 
