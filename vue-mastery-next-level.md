@@ -104,10 +104,12 @@ Starting code: [tag `progress-bar-start`](https://github.com/Code-Pop/real-world
 
 ## 12. Mixins
 
-- I already learned how to make mixins for the iPACS.
+- See [Vue Mastery Vue 3 Essentials lesson 1](https://www.vuemastery.com/courses/vue-3-essentials/why-the-composition-api/) for the drawbacks of mixins.
+- Mixins are typically .js files, so curly braces are needed for imports.
 - Mixin data is secondary to component data. If both have the same object or methods, the component takes precedence.
 - For global mixins (mixed in to every component), add `Vue.mixin()` to the _main.js_ file. Be careful with this, because every component in your application will contain this mixin.
 - Code: [tag mixins_finish](https://github.com/Code-Pop/real-world-vue/releases/tag/mixins_finish)
+- I had already learned how to make mixins for the iPACS.
 
 ## 13. Filters
 
