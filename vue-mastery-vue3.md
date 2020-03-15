@@ -68,6 +68,32 @@ You don't have to include all the code directly inside a massive `setup()` metho
 
 ## 3. Methods
 
+- Methods can be declared as functions inside of `setup()`.
+- We don't have access to `this`, so instead we access values inside of reactive references by using the object name.
+- When Vue finds a `ref()` in the `template`, it automatically exposes the inner value, so there's no need to modify `{{ capacity }}`.
+- The Vue component below is a simple counter, which could show the total capacity at an event.
+
+  ```html
+  <template>
+    <div>
+      <p>Capacity: {{ capacity }}</p>
+      <button @click="increaseCapacity()">Increase Capacity</button>
+    </div>
+  </template>
+  <script>
+    import { ref } from "vue"
+    export default {
+      setup() {
+        const capacity = ref(3)
+        function increaseCapacity() {
+          capacity.value++
+        }
+        return { capacity, increaseCapacity }
+      }
+    }
+  </script>
+  ```
+
 ## 4. Computed Properties
 
 ## 5. The Reactive Syntax
