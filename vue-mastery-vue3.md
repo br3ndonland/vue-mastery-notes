@@ -11,6 +11,8 @@
   - [Code reuse patterns have drawbacks](#code-reuse-patterns-have-drawbacks)
   - [The composition API allows components to be organized by logical concerns](#the-composition-api-allows-components-to-be-organized-by-logical-concerns)
 - [2. Setup & Reactive References](#2-setup--reactive-references)
+  - [Setup](#setup)
+  - [Reactive references](#reactive-references)
 - [3. Methods](#3-methods)
 - [4. Computed Properties](#4-computed-properties)
 - [5. The Reactive Syntax](#5-the-reactive-syntax)
@@ -44,6 +46,25 @@ You don't have to include all the code directly inside a massive `setup()` metho
   <img src="img/vm-vue3-01-11-composition-functions.jpg" alt="Vue 3 composition functions" width="600px" />
 
 ## 2. Setup & Reactive References
+
+### Setup
+
+- `setup()` is additive, it doesn't replace previous methods.
+- Executes before:
+  - Components
+  - Props
+  - Data
+  - Methods
+  - Computed Properties
+  - Lifecycle methods
+- We can use a `props` argument to provide props to `setup()`.
+- Doesn't have access to `this`. We use the `context` argument instead.
+- There's a [Vue 2 plugin for the composition API](https://github.com/vuejs/composition-api) (not recommended for production).
+
+### Reactive references
+
+- Reactive data are wrapped in `ref()`, which is sort of a stand-in for `data()` in the `setup()` function.
+- We also need to `return` the reactive object.
 
 ## 3. Methods
 
