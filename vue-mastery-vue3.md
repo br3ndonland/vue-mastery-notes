@@ -22,6 +22,8 @@
 - [7. Lifecycle Hooks](#7-lifecycle-hooks)
 - [8. Watch](#8-watch)
 - [9. Sharing State](#9-sharing-state)
+  - [Single-file app](#single-file-app)
+  - [Refactoring with the Composition API](#refactoring-with-the-composition-api)
 
 ## 1. Why the Composition API
 
@@ -405,3 +407,129 @@ You don't have to include all the code directly inside a massive `setup()` metho
   ```
 
 ## 9. Sharing State
+
+It's often helpful to refactor API calls into separate files.Here, we build on the code from the previous lesson, starting with a single-file Vue app.
+
+### Single-file app
+
+_/src/App.js_
+
+```vue
+<template>
+  <div>
+    Search for <input v-model="searchInput" />
+    <div>
+      <p>Loading: {{ loading }}</p>
+      <p>Error: {{ error }}</p>
+      <p>Number of events: {{ results }}</p>
+    </div>
+  </div>
+</template>
+<script>
+import { ref, watch } from "@vue/composition-api"
+import eventApi from "@/api/event.js"
+export default {
+  setup() {
+    const searchInput = ref("")
+    const results = ref(null)
+    const loading = ref(false)
+    const error = ref(null)
+    async function loadData(search) {
+      loading.value = true
+      error.value = null
+      results.value = null
+      try {
+        results.value = await eventApi.getEventCount(search.value)
+      } catch (err) {
+        error.value = err
+      } finally {
+        loading.value = false
+      }
+    }
+    watch(searchInput, () => {
+      if (searchInput.value !== "") {
+        loadData(searchInput)
+      } else {
+        results.value = null
+      }
+    })
+    return { searchInput, results, loading, error }
+  }
+}
+</script>
+```
+
+### Refactoring with the Composition API
+
+_/composables/use-promise.js_
+
+```js
+import { ref } from "@vue/composition-api"
+export default function usePromise(fn) {
+  // fn is the actual API call
+  const results = ref(null)
+  const loading = ref(false)
+  const error = ref(null)
+  const createPromise = async (...args) => {
+    // Args is where we send in searchInput
+    loading.value = true
+    error.value = null
+    results.value = null
+    try {
+      results.value = await fn(...args) // Passing through the SearchInput
+    } catch (err) {
+      error.value = err
+    } finally {
+      loading.value = false
+    }
+  }
+  return { results, loading, error, createPromise }
+}
+```
+
+_/src/App.js_
+
+```vue
+<template>
+  <div>
+    Search for <input v-model="searchInput" />
+    <div>
+      <p>Loading: {{ getEvents.loading }}</p>
+      <p>Error: {{ getEvents.error }}</p>
+      <p>Number of events: {{ getEvents.results }}</p>
+    </div>
+  </div>
+</template>
+<script>
+import { ref, watch } from "@vue/composition-api"
+import eventApi from "@/api/event.js"
+import usePromise from "@/composables/use-promise"
+export default {
+  setup() {
+    const searchInput = ref("")
+    const getEvents = usePromise(search => eventApi.getEventCount(search.value))
+
+    watch(searchInput, () => {
+      if (searchInput.value !== "") {
+        getEvents.createPromise(searchInput)
+      } else {
+        getEvents.results.value = null
+      }
+    })
+    return { searchInput, getEvents }
+  }
+}
+</script>
+```
+
+> _Caveat_
+>
+> When I ran this by members of the Vue core team, they called attention to ...getEvents. Specifically that I shouldn’t be destructuring the object. Without destructuring the data is namespaced under getEvents which makes it more encapsulated and clear where the data is coming from in the component using it...
+>
+> It looks like Vue 2 with the composition API isn’t properly recognizing my Reactive References and calling .value like it should. I could fix this by adding .value manually orr by actually using Vue 3. I tested the code with Vue 3 and sure enough, it saw the Reactive References and properly displayed the .value.
+
+_Note that the code above is updated without destructuring as recommended._
+
+**COURSE COMPLETE!!! I RULE!!!**
+
+<img src="img/vm-vue3-complete.png" alt="Vue Mastery Vue 3 course completion page" width="600px" />
