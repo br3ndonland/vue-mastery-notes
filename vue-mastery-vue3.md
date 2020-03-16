@@ -292,6 +292,76 @@ You don't have to include all the code directly inside a massive `setup()` metho
 
 ## 7. Lifecycle Hooks
 
+- Standard [lifecycle](https://vuejs.org/v2/api/#Options-Lifecycle-Hooks) hooks:
+  - `beforeCreate()` - Called immediately after instance is initialized, before options are processed.
+  - `created()` - Called after the instance has been created.
+  - `beforeMount()` - Right before mounting of the DOM begins
+  - `mounted()` - Called when the instance has been mounted (browser updated).
+  - `beforeUpdate()` - Called when reactive data has changed, before the DOM is re-rendered.
+  - `updated()` - Called when reactive data has changed, and the DOM has been re-rendered.
+  - `beforeDestroy()` - Called right before the Vue instance is destroyed.
+  - `destroyed()` - Called after the Vue instance has been destroyed.
+- Newer Vue 2 lifecycle hooks:
+  - `activated()` - Used for , when a component inside is toggled on.
+  - `deactivated()` - Used for , when a component inside is toggled off.
+  - `errorCaptured()` - Called when an error from any descendent component is captured.
+- Renamed Vue 3 lifecycle methods (this is additive - old syntax still works)
+
+  - `beforeDestroy()` -> `beforeUnmount()`
+  - `destroyed()` -> `unmounted()`
+
+- Callback hooks are created inside `setup()` by adding `on` to the callback name. The `beforeCreate()` method is not needed because it is called before `setup()`. Likewise, `created()` is not needed because it is called after `setup()`. Code previously placed in `beforeCreate()` or `created()` (like API calls) should be placed directly inside `setup()`:
+
+  ```js
+  import {
+    onBeforeMount,
+    onMounted,
+    onBeforeUpdate,
+    onUpdated,
+    onBeforeUnmount,
+    onUnmounted,
+    onActivated,
+    onDeactivated,
+    onErrorCaptured
+  } from "vue"
+
+  export default {
+    setup() {
+      onBeforeMount(() => {
+        console.log("Before Mount!")
+      })
+      onMounted(() => {
+        console.log("Mounted!")
+      })
+      onBeforeUpdate(() => {
+        console.log("Before Update!")
+      })
+      onUpdated(() => {
+        console.log("Updated!")
+      })
+      onBeforeUnmount(() => {
+        console.log("Before Unmount!")
+      })
+      onUnmounted(() => {
+        console.log("Unmounted!")
+      })
+      onActivated(() => {
+        console.log("Activated!")
+      })
+      onDeactivated(() => {
+        console.log("Deactivated!")
+      })
+      onErrorCaptured(() => {
+        console.log("Error Captured!")
+      })
+    }
+  }
+  ```
+
+- New Vue 3 lifecycle methods
+  - `onRenderTracked()` - called when a reactive dependency is first being accessed in the render function, during render. This dependency will now be tracked. This is helpful to see which dependencies are being tracked, for debugging.
+  - `onRenderTriggered()` - Called when a new render is triggered, allowing you to inspect what dependency triggered a component to re-render.
+
 ## 8. Watch
 
 ## 9. Sharing State
