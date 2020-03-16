@@ -63,7 +63,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
 
 ### Reactive references
 
-- Reactive data are wrapped in `ref()`, which is sort of a stand-in for `data()` in the `setup()` function.
+- Reactive data are wrapped in `ref()`, which is sort of a stand-in for `data()` in the `setup()` function. We first need to `import { ref } from "vue"`.
 - We also need to `return` the reactive object.
 
 ## 3. Methods
@@ -95,6 +95,41 @@ You don't have to include all the code directly inside a massive `setup()` metho
   ```
 
 ## 4. Computed Properties
+
+- We can also use computed properties inside the `setup()` method.
+- As with reactive references, we need to `import { computed } from "vue"`.
+- Continuing with the example from above:
+
+  ```html
+  <template>
+    <div>
+      <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
+      <h2>Attending</h2>
+      <ul>
+        <li v-for="(name, index) in attending" :key="index">
+          {{ name }}
+        </li>
+      </ul>
+      <button @click="increaseCapacity()">Increase Capacity</button>
+    </div>
+  </template>
+  <script>
+    import { ref, computed } from "vue"
+    export default {
+      setup() {
+        const capacity = ref(4)
+        const attending = ref(["Tim", "Bob", "Joe"])
+        const spacesLeft = computed(() => {
+          return capacity.value - attending.value.length
+        })
+        function increaseCapacity() {
+          capacity.value++
+        }
+        return { capacity, attending, spacesLeft, increaseCapacity }
+      }
+    }
+  </script>
+  ```
 
 ## 5. The Reactive Syntax
 
