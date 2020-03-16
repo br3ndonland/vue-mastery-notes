@@ -17,6 +17,8 @@
 - [4. Computed Properties](#4-computed-properties)
 - [5. The Reactive Syntax](#5-the-reactive-syntax)
 - [6. Modularizing](#6-modularizing)
+  - [Organizing component by logical concerns](#organizing-component-by-logical-concerns)
+  - [Reusing code across components](#reusing-code-across-components)
 - [7. Lifecycle Hooks](#7-lifecycle-hooks)
 - [8. Watch](#8-watch)
 - [9. Sharing State](#9-sharing-state)
@@ -171,6 +173,122 @@ You don't have to include all the code directly inside a massive `setup()` metho
   ```
 
 ## 6. Modularizing
+
+- Now that we've established the syntax for the `setup()` function, we return to the key features of the Composition API:
+  - Organizing components by logical concerns
+  - Reusing code across components
+
+### Organizing component by logical concerns
+
+- Here, we extract the code from the `setup()` function (using the `ref()` syntax from [lesson 4](#4-computed-properties)) into `useEventSpace()`.
+
+  ```html
+  <template>
+    <div>
+      <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
+      <h2>Attending</h2>
+      <ul>
+        <li v-for="(name, index) in attending" :key="index">
+          {{ name }}
+        </li>
+      </ul>
+      <button @click="increaseCapacity()">Increase Capacity</button>
+    </div>
+  </template>
+  <script>
+    import { ref, computed } from "vue"
+    export default {
+      setup() {
+        return useEventSpace()
+      }
+    }
+    function useEventSpace() {
+      const capacity = ref(4)
+      const attending = ref(["Tim", "Bob", "Joe"])
+      const spacesLeft = computed(() => {
+        return capacity.value - attending.value.length
+      })
+      function increaseCapacity() {
+        capacity.value++
+      }
+      return { capacity, attending, spacesLeft, increaseCapacity }
+    }
+  </script>
+  ```
+
+### Reusing code across components
+
+- Next, we extract `useEventSpace()` into a separate component. The instructor Gregg calls the folder for composition functions _use/_.
+
+  ```js
+  // use/event-space.vue
+  import { ref, computed } from "vue"
+  export default function useEventSpace() {
+    const capacity = ref(4)
+    const attending = ref(["Tim", "Bob", "Joe"])
+    const spacesLeft = computed(() => {
+      return capacity.value - attending.value.length
+    })
+    function increaseCapacity() {
+      capacity.value++
+    }
+    return { capacity, attending, spacesLeft, increaseCapacity }
+  }
+  ```
+
+- We then import the new component.
+
+  ```html
+  <template>
+    <div>
+      <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
+      <h2>Attending</h2>
+      <ul>
+        <li v-for="(name, index) in attending" :key="index">
+          {{ name }}
+        </li>
+      </ul>
+      <button @click="increaseCapacity()">Increase Capacity</button>
+    </div>
+  </template>
+  <script>
+    import useEventSpace from "@/use/event-space"
+    // import useMapping from "@/use/mapping"
+    export default {
+      setup() {
+        return useEventSpace()
+        // Additional components can be added, and the result destructured:
+        // return { ...useEventSpace(), ...useMapping() }
+      }
+    }
+  </script>
+  ```
+
+- When more composition components are added, the result needs to be destructured to produce valid JavaScript syntax:
+
+  ```html
+  <template>
+    <div>
+      <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
+      <h2>Attending</h2>
+      <ul>
+        <li v-for="(name, index) in attending" :key="index">
+          {{ name }}
+        </li>
+      </ul>
+      <button @click="increaseCapacity()">Increase Capacity</button>
+    </div>
+  </template>
+  <script>
+    import useEventSpace from "@/use/event-space"
+    import useMapping from "@/use/mapping"
+    export default {
+      setup() {
+        return { ...useEventSpace(), ...useMapping() }
+      }
+    }
+  </script>
+  ```
 
 ## 7. Lifecycle Hooks
 
