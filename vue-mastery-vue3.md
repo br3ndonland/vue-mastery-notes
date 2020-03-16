@@ -75,7 +75,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
 - When Vue finds a `ref()` in the `template`, it automatically exposes the inner value, so there's no need to modify `{{ capacity }}`.
 - The Vue component below is a simple counter, which could show the total capacity at an event.
 
-  ```html
+  ```vue
   <template>
     <div>
       <p>Capacity: {{ capacity }}</p>
@@ -83,16 +83,16 @@ You don't have to include all the code directly inside a massive `setup()` metho
     </div>
   </template>
   <script>
-    import { ref } from "vue"
-    export default {
-      setup() {
-        const capacity = ref(3)
-        function increaseCapacity() {
-          capacity.value++
-        }
-        return { capacity, increaseCapacity }
+  import { ref } from "vue"
+  export default {
+    setup() {
+      const capacity = ref(3)
+      function increaseCapacity() {
+        capacity.value++
       }
+      return { capacity, increaseCapacity }
     }
+  }
   </script>
   ```
 
@@ -102,7 +102,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
 - As with reactive references, we need to `import { computed } from "vue"`.
 - Continuing with the example from above:
 
-  ```html
+  ```vue
   <template>
     <div>
       <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
@@ -116,20 +116,20 @@ You don't have to include all the code directly inside a massive `setup()` metho
     </div>
   </template>
   <script>
-    import { ref, computed } from "vue"
-    export default {
-      setup() {
-        const capacity = ref(4)
-        const attending = ref(["Tim", "Bob", "Joe"])
-        const spacesLeft = computed(() => {
-          return capacity.value - attending.value.length
-        })
-        function increaseCapacity() {
-          capacity.value++
-        }
-        return { capacity, attending, spacesLeft, increaseCapacity }
+  import { ref, computed } from "vue"
+  export default {
+    setup() {
+      const capacity = ref(4)
+      const attending = ref(["Tim", "Bob", "Joe"])
+      const spacesLeft = computed(() => {
+        return capacity.value - attending.value.length
+      })
+      function increaseCapacity() {
+        capacity.value++
       }
+      return { capacity, attending, spacesLeft, increaseCapacity }
     }
+  }
   </script>
   ```
 
@@ -139,7 +139,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
 - We `import { reactive, toRefs } from "vue"` instead of `ref`.
 - We can then destructure the `event` object with `...toRefs(event)`.
 
-  ```html
+  ```vue
   <template>
     <div>
       <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
@@ -153,22 +153,22 @@ You don't have to include all the code directly inside a massive `setup()` metho
     </div>
   </template>
   <script>
-    import { reactive, computed, toRefs } from "vue"
-    export default {
-      setup() {
-        const event = reactive({
-          capacity: 4,
-          attending: ["Tim", "Bob", "Joe"],
-          spacesLeft: computed(() => {
-            return event.capacity - event.attending.length
-          })
+  import { reactive, computed, toRefs } from "vue"
+  export default {
+    setup() {
+      const event = reactive({
+        capacity: 4,
+        attending: ["Tim", "Bob", "Joe"],
+        spacesLeft: computed(() => {
+          return event.capacity - event.attending.length
         })
-        function increaseCapacity() {
-          event.capacity++
-        }
-        return { ...toRefs(event), increaseCapacity }
+      })
+      function increaseCapacity() {
+        event.capacity++
       }
+      return { ...toRefs(event), increaseCapacity }
     }
+  }
   </script>
   ```
 
@@ -182,7 +182,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
 
 - Here, we extract the code from the `setup()` function (using the `ref()` syntax from [lesson 4](#4-computed-properties)) into `useEventSpace()`.
 
-  ```html
+  ```vue
   <template>
     <div>
       <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
@@ -196,23 +196,23 @@ You don't have to include all the code directly inside a massive `setup()` metho
     </div>
   </template>
   <script>
-    import { ref, computed } from "vue"
-    export default {
-      setup() {
-        return useEventSpace()
-      }
+  import { ref, computed } from "vue"
+  export default {
+    setup() {
+      return useEventSpace()
     }
-    function useEventSpace() {
-      const capacity = ref(4)
-      const attending = ref(["Tim", "Bob", "Joe"])
-      const spacesLeft = computed(() => {
-        return capacity.value - attending.value.length
-      })
-      function increaseCapacity() {
-        capacity.value++
-      }
-      return { capacity, attending, spacesLeft, increaseCapacity }
+  }
+  function useEventSpace() {
+    const capacity = ref(4)
+    const attending = ref(["Tim", "Bob", "Joe"])
+    const spacesLeft = computed(() => {
+      return capacity.value - attending.value.length
+    })
+    function increaseCapacity() {
+      capacity.value++
     }
+    return { capacity, attending, spacesLeft, increaseCapacity }
+  }
   </script>
   ```
 
@@ -238,7 +238,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
 
 - We then import the new component.
 
-  ```html
+  ```vue
   <template>
     <div>
       <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
@@ -252,21 +252,21 @@ You don't have to include all the code directly inside a massive `setup()` metho
     </div>
   </template>
   <script>
-    import useEventSpace from "@/use/event-space"
-    // import useMapping from "@/use/mapping"
-    export default {
-      setup() {
-        return useEventSpace()
-        // Additional components can be added, and the result destructured:
-        // return { ...useEventSpace(), ...useMapping() }
-      }
+  import useEventSpace from "@/use/event-space"
+  // import useMapping from "@/use/mapping"
+  export default {
+    setup() {
+      return useEventSpace()
+      // Additional components can be added, and the result destructured:
+      // return { ...useEventSpace(), ...useMapping() }
     }
+  }
   </script>
   ```
 
 - When more composition components are added, the result needs to be destructured to produce valid JavaScript syntax:
 
-  ```html
+  ```vue
   <template>
     <div>
       <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
@@ -280,13 +280,13 @@ You don't have to include all the code directly inside a massive `setup()` metho
     </div>
   </template>
   <script>
-    import useEventSpace from "@/use/event-space"
-    import useMapping from "@/use/mapping"
-    export default {
-      setup() {
-        return { ...useEventSpace(), ...useMapping() }
-      }
+  import useEventSpace from "@/use/event-space"
+  import useMapping from "@/use/mapping"
+  export default {
+    setup() {
+      return { ...useEventSpace(), ...useMapping() }
     }
+  }
   </script>
   ```
 
@@ -324,7 +324,6 @@ You don't have to include all the code directly inside a massive `setup()` metho
     onDeactivated,
     onErrorCaptured
   } from "vue"
-
   export default {
     setup() {
       onBeforeMount(() => {
@@ -368,7 +367,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
 - We can then add the `watch()` method inside `setup()`, including the necessary changes to the reactive references. Multiple reactive references can be passed inside an array.
 - In this example, _event.js_ is a simple API the instructor created.
 
-  ```html
+  ```vue
   <template>
     <div>
       <input v-model="firstName" label="First name:" />
@@ -379,21 +378,21 @@ You don't have to include all the code directly inside a massive `setup()` metho
     </div>
   </template>
   <script>
-    import { ref } from "@vue/composition-api"
-    import eventApi from "@/api/event.js"
-    export default {
-      setup() {
-        const firstName = ref("")
-        const LastName = ref("")
-        const firstNameResults = ref(0)
-        const lastNameResults = ref(0)
-        watch([firstName, lastName], () => {
-          firstNameResults.value = eventApi.getEventCount(firstName.value)
-          lastNameResults.value = eventApi.getEventCount(lastName.value)
-        })
-        return { searchInput, results }
-      }
+  import { ref } from "@vue/composition-api"
+  import eventApi from "@/api/event.js"
+  export default {
+    setup() {
+      const firstName = ref("")
+      const LastName = ref("")
+      const firstNameResults = ref(0)
+      const lastNameResults = ref(0)
+      watch([firstName, lastName], () => {
+        firstNameResults.value = eventApi.getEventCount(firstName.value)
+        lastNameResults.value = eventApi.getEventCount(lastName.value)
+      })
+      return { searchInput, results }
     }
+  }
   </script>
   ```
 
