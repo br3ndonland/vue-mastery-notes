@@ -364,4 +364,45 @@ You don't have to include all the code directly inside a massive `setup()` metho
 
 ## 8. Watch
 
+- To watch reactive references, we `import { watch } from "vue"`
+- We can then add the `watch()` method inside `setup()`, including the necessary changes to the reactive references. Multiple reactive references can be passed inside an array.
+- In this example, _event.js_ is a simple API the instructor created.
+
+  ```html
+  <template>
+    <div>
+      <input v-model="firstName" label="First name:" />
+      <input v-model="lastName" label="Last name:" />
+      <div>
+        <p>Name entered: {{ firstName }} {{ lastName }}</p>
+      </div>
+    </div>
+  </template>
+  <script>
+    import { ref } from "@vue/composition-api"
+    import eventApi from "@/api/event.js"
+    export default {
+      setup() {
+        const firstName = ref("")
+        const LastName = ref("")
+        const firstNameResults = ref(0)
+        const lastNameResults = ref(0)
+        watch([firstName, lastName], () => {
+          firstNameResults.value = eventApi.getEventCount(firstName.value)
+          lastNameResults.value = eventApi.getEventCount(lastName.value)
+        })
+        return { searchInput, results }
+      }
+    }
+  </script>
+  ```
+
+- In addition to the newly updated values, the previous values can still be accessed with additional arguments to `watch()`, in the format `watch([trigger1, trigger2], (newVals, oldVals))`:
+
+  ```js
+  watch([firstName, lastName], ([newFirst, newLast], [oldFirst, oldLast]) => {
+    ...
+  });
+  ```
+
 ## 9. Sharing State
