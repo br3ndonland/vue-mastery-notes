@@ -13,12 +13,12 @@ class Dep {
     }
   }
   notify() {
-    this.subscribers.forEach(sub => sub())
+    this.subscribers.forEach((sub) => sub())
   }
 }
 
 // Go through each of our data properties
-Object.keys(data).forEach(key => {
+Object.keys(data).forEach((key) => {
   let internalValue = data[key]
 
   // Each property gets a dependency instance
@@ -32,7 +32,7 @@ Object.keys(data).forEach(key => {
     set(newVal) {
       internalValue = newVal
       dep.notify() // <-- Re-run stored functions
-    }
+    },
   })
 })
 

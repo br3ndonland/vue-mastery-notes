@@ -37,7 +37,7 @@ Key concepts
     const app = new Vue({
       data: {},
       methods: {},
-      computed: {}
+      computed: {},
     })
     ```
 
@@ -48,7 +48,7 @@ Key concepts
       state: {},
       mutations: {},
       actions: {},
-      getters: {}
+      getters: {},
     })
     ```
 
@@ -62,7 +62,7 @@ Key concepts
   const store = new Vuex.Store({
     state: {
       isLoading: false,
-      todos: []
+      todos: [],
     },
     mutations: {
       SET_LOADING_STATUS(state) {
@@ -70,17 +70,17 @@ Key concepts
       },
       SET_TODOS(state, todos) {
         state.todos = todos
-      }
+      },
     },
     actions: {
       fetchTodos(context) {
         context.commit("SET_LOADING_STATUS")
-        axios.get("/api/todos").then(response => {
+        axios.get("/api/todos").then((response) => {
           context.commit("SET_LOADING_STATUS")
           context.commit("SET_TODOS", response.data.todos)
         })
-      }
-    }
+      },
+    },
   })
   ```
 
@@ -119,7 +119,7 @@ Key concepts
     new Vue({
       router,
       store,
-      render: h => h(App)
+      render: (h) => h(App),
     }).$mount("#app")
     ```
 
@@ -134,7 +134,7 @@ Key concepts
     export default new Vuex.Store({
       state: {},
       mutations: {},
-      actions: {}
+      actions: {},
     })
     ```
 
@@ -147,7 +147,7 @@ Key concepts
       "Don Quixote",
       "The Hobbit",
       "Alice in Wonderland",
-      "Tale of Two Cities"
+      "Tale of Two Cities",
     ]
     console.log(...books)
     ```
@@ -191,7 +191,7 @@ Key concepts, as introduced in [1. Intro to Vuex](#1-Intro-to-Vuex):
     mutations: {
       PICK_UP_BREAD(state, bread) {
         state.bread = bread
-      }
+      },
     },
     actions: {
       async pleasePickUpBread({ commit }) {
@@ -199,8 +199,8 @@ Key concepts, as introduced in [1. Intro to Vuex](#1-Intro-to-Vuex):
           let bread = await fetch("/bread")
           commit("PICK_UP_BREAD", bread)
         }
-      }
-    }
+      },
+    },
   })
   ```
 
@@ -284,13 +284,13 @@ Key concepts
             } catch (e) {
               const notification = {
                 type: "error",
-                message: `There was a problem fetching the event: ${e.message}`
+                message: `There was a problem fetching the event: ${e.message}`,
               }
               dispatch("notification/add", notification, { root: true })
             }
           }
-        }
-      }
+        },
+      },
     }
     ```
 - I, of course, refactored the actions in _store.js_ with async/await.

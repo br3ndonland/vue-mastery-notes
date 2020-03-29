@@ -180,12 +180,12 @@ We can bind the `img` element to the image for each product.
     props: {
       products: {
         type: Array,
-        required: true
+        required: true,
       },
       showImage: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
     template: `
     <ul>
@@ -194,7 +194,7 @@ We can bind the `img` element to the image for each product.
         {{ product.name }}
       </li>
     </ul>
-  `
+  `,
   })
   new Vue({
     el: "#app",
@@ -202,14 +202,14 @@ We can bind the `img` element to the image for each product.
       products: [
         {
           name: "Magnifying Glass",
-          image: "magnify.png"
+          image: "magnify.png",
         },
         {
           name: "Light Bulb",
-          image: "bulb.png"
-        }
-      ]
-    }
+          image: "bulb.png",
+        },
+      ],
+    },
   })
 </script>
 ```
@@ -242,8 +242,8 @@ See the Vue.js docs on the [deprecated slot-scope syntax](https://vuejs.org/v2/g
     props: {
       products: {
         type: Array,
-        required: true
-      }
+        required: true,
+      },
     },
     template: `
     <ul>
@@ -252,7 +252,7 @@ See the Vue.js docs on the [deprecated slot-scope syntax](https://vuejs.org/v2/g
             {{ product.name }}
         </slot>
       </li>
-    </ul>`
+    </ul>`,
   })
   new Vue({
     // Same as above ...
@@ -284,8 +284,8 @@ See [Vue.js docs on destructuring slot props](https://vuejs.org/v2/guide/compone
     props: {
       products: {
         type: Array,
-        required: true
-      }
+        required: true,
+      },
     },
     template: `
     <ul>
@@ -294,7 +294,7 @@ See [Vue.js docs on destructuring slot props](https://vuejs.org/v2/guide/compone
             {{ product.name }}
         </slot>
       </li>
-    </ul>`
+    </ul>`,
   })
   new Vue({
     // Same as above ...
@@ -352,8 +352,8 @@ Vue.component("products-list", {
   props: {
     products: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
   <ul>
@@ -365,7 +365,7 @@ Vue.component("products-list", {
         <img :src="product.image" />
       </slot>
     </li>
-  </ul>`
+  </ul>`,
 })
 new Vue({
   el: "#app",
@@ -374,15 +374,15 @@ new Vue({
       {
         name: "Magnifying Glass",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mag_glass_request.jpg"
+          "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mag_glass_request.jpg",
       },
       {
         name: "Light Bulb",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/5/5c/Led_light_bulb_-_led_lamp_1.png"
-      }
-    ]
-  }
+          "https://upload.wikimedia.org/wikipedia/commons/5/5c/Led_light_bulb_-_led_lamp_1.png",
+      },
+    ],
+  },
 })
 ```
 
@@ -431,7 +431,7 @@ Vue.component("products-list", {
   props: {
     products: {
       type: Array,
-      required: true
+      required: true,
     },
     productRenderer: {
       // <-- Here's our new prop
@@ -439,16 +439,16 @@ Vue.component("products-list", {
       default(h, product) {
         // <-- By default just print the name
         return product.name
-      }
-    }
+      },
+    },
   },
   render(h) {
     return h("ul", [
       this.products.map(
-        product => h("li", [this.productRenderer(h, product)]) // use our new prop
-      )
+        (product) => h("li", [this.productRenderer(h, product)]) // use our new prop
+      ),
     ])
-  }
+  },
 })
 new Vue({
   el: "#app",
@@ -457,27 +457,27 @@ new Vue({
       {
         name: "Magnifying Glass",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mag_glass_request.jpg"
+          "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mag_glass_request.jpg",
       },
       {
         name: "Light Bulb",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/5/5c/Led_light_bulb_-_led_lamp_1.png"
-      }
+          "https://upload.wikimedia.org/wikipedia/commons/5/5c/Led_light_bulb_-_led_lamp_1.png",
+      },
     ],
     imageRenderer(h, product) {
       // <-- The imageRenderer I'm passing in
       return [
         h("img", {
           attrs: {
-            src: product.image
-          }
+            src: product.image,
+          },
         }),
         " ",
-        product.name.toUpperCase()
+        product.name.toUpperCase(),
       ]
-    }
-  }
+    },
+  },
 })
 ```
 

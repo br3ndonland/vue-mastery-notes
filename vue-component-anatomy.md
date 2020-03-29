@@ -61,19 +61,19 @@ CSS and SCSS go here.
       prop2: {
         type: String,
         required: true,
-        default: `Hello, World!`
-      }
+        default: `Hello, World!`,
+      },
     },
     data() {
       return {
         key1: value1,
-        key2: value2
+        key2: value2,
       }
     },
     computed: {},
     watch: {},
     created() {},
-    methods: {}
+    methods: {},
   }
 </script>
 

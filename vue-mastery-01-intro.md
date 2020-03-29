@@ -42,8 +42,8 @@ var app = new Vue({
   el: "#app",
   data: {
     product: "Compass",
-    description: "A pair of warm, fuzzy socks"
-  }
+    description: "A pair of warm, fuzzy socks",
+  },
 })
 ```
 
@@ -91,8 +91,8 @@ var app = new Vue({
     product: "Socks",
     image:
       "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
-    link: "https://brew.sh"
-  }
+    link: "https://brew.sh",
+  },
 })
 ```
 
@@ -216,8 +216,8 @@ var app = new Vue({
     image:
       "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
     inStock: true,
-    onSale: true
-  }
+    onSale: true,
+  },
 })
 ```
 
@@ -349,14 +349,14 @@ var app = new Vue({
     variants: [
       {
         variantId: 2234,
-        variantColor: "green"
+        variantColor: "green",
       },
       {
         variantId: 2235,
-        variantColor: "blue"
-      }
-    ]
-  }
+        variantColor: "blue",
+      },
+    ],
+  },
 })
 ```
 
@@ -504,16 +504,16 @@ var app = new Vue({
         variantId: 2234,
         variantColor: "green",
         variantImage:
-          "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg"
+          "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
       },
       {
         variantId: 2235,
         variantColor: "blue",
         variantImage:
-          "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg"
-      }
+          "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg",
+      },
     ],
-    cart: 0
+    cart: 0,
   },
   methods: {
     addToCart() {
@@ -524,8 +524,8 @@ var app = new Vue({
     },
     updateProduct(variantImage) {
       this.image = variantImage
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -708,16 +708,16 @@ var app = new Vue({
         variantId: 2234,
         variantColor: "green",
         variantImage:
-          "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg"
+          "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
       },
       {
         variantId: 2235,
         variantColor: "blue",
         variantImage:
-          "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg"
-      }
+          "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg",
+      },
     ],
-    cart: 0
+    cart: 0,
   },
   methods: {
     addToCart() {
@@ -725,8 +725,8 @@ var app = new Vue({
     },
     updateProduct(variantImage) {
       this.image = variantImage
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -904,18 +904,18 @@ var app = new Vue({
         variantColor: "green",
         variantImage:
           "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
-        variantQuantity: 10
+        variantQuantity: 10,
       },
       {
         variantId: 2235,
         variantColor: "blue",
         variantImage:
           "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg",
-        variantQuantity: 0
-      }
+        variantQuantity: 0,
+      },
     ],
     cart: 0,
-    onSale: true
+    onSale: true,
   },
   methods: {
     addToCart() {
@@ -924,7 +924,7 @@ var app = new Vue({
     updateProduct(index) {
       this.selectedVariant = index
       console.log(index)
-    }
+    },
   },
   computed: {
     title() {
@@ -938,8 +938,8 @@ var app = new Vue({
     },
     saleInfo() {
       return `This item, ${this.brand} ${this.product}, is on sale!!!`
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -1088,8 +1088,8 @@ textarea {
         message: {
           type: String,
           required: true,
-          default: "Hi"
-        }
+          default: "Hi",
+        },
       },
       template: `<div>{{ message }}</div>`,
       data() {
@@ -1098,7 +1098,7 @@ textarea {
         }
       },
       methods: {},
-      computed: {}
+      computed: {},
     })
     ```
 
@@ -1124,21 +1124,21 @@ Vue.component("product-details", {
   props: {
     details: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
     <ul>
       <li v-for="detail in details">{{ detail }}</li>
     </ul>
-  `
+  `,
 })
 Vue.component("product", {
   props: {
     premium: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
   <div class="product">
@@ -1184,26 +1184,26 @@ Vue.component("product", {
           variantColor: "green",
           variantImage:
             "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
-          variantQuantity: 10
+          variantQuantity: 10,
         },
         {
           variantId: 2235,
           variantColor: "blue",
           variantImage:
             "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg",
-          variantQuantity: 0
-        }
+          variantQuantity: 0,
+        },
       ],
-      cart: 0
+      cart: 0,
     }
   },
   methods: {
-    addToCart: function() {
+    addToCart: function () {
       this.cart += 1
     },
-    updateProduct: function(index) {
+    updateProduct: function (index) {
       this.selectedVariant = index
-    }
+    },
   },
   computed: {
     title() {
@@ -1220,14 +1220,14 @@ Vue.component("product", {
         return "Free"
       }
       return 2.99
-    }
-  }
+    },
+  },
 })
 var app = new Vue({
   el: "#app",
   data: {
-    premium: true
-  }
+    premium: true,
+  },
 })
 ```
 
@@ -1365,8 +1365,8 @@ Vue.component("product", {
   props: {
     premium: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
     <div class="product">
@@ -1413,16 +1413,16 @@ Vue.component("product", {
           variantColor: "green",
           variantImage:
             "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
-          variantQuantity: 10
+          variantQuantity: 10,
         },
         {
           variantId: 2235,
           variantColor: "blue",
           variantImage:
             "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg",
-          variantQuantity: 0
-        }
-      ]
+          variantQuantity: 0,
+        },
+      ],
     }
   },
   methods: {
@@ -1437,7 +1437,7 @@ Vue.component("product", {
     },
     updateProduct(index) {
       this.selectedVariant = index
-    }
+    },
   },
   computed: {
     title() {
@@ -1454,14 +1454,14 @@ Vue.component("product", {
         return "Free"
       }
       return 2.99
-    }
-  }
+    },
+  },
 })
 var app = new Vue({
   el: "#app",
   data: {
     premium: true,
-    cart: []
+    cart: [],
   },
   methods: {
     updateCart(id) {
@@ -1469,8 +1469,8 @@ var app = new Vue({
     },
     removeFromCart(id) {
       this.cart.pop(id)
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -1623,8 +1623,8 @@ Vue.component("product", {
   props: {
     premium: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
     <div class="product">
@@ -1679,17 +1679,17 @@ Vue.component("product", {
           variantColor: "green",
           variantImage:
             "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
-          variantQuantity: 10
+          variantQuantity: 10,
         },
         {
           variantId: 2235,
           variantColor: "blue",
           variantImage:
             "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg",
-          variantQuantity: 0
-        }
+          variantQuantity: 0,
+        },
       ],
-      reviews: []
+      reviews: [],
     }
   },
   methods: {
@@ -1701,7 +1701,7 @@ Vue.component("product", {
     },
     addReview(productReview) {
       this.reviews.push(productReview)
-    }
+    },
   },
   computed: {
     title() {
@@ -1718,8 +1718,8 @@ Vue.component("product", {
         return "Free"
       }
       return 2.99
-    }
-  }
+    },
+  },
 })
 Vue.component("product-review", {
   template: `
@@ -1768,7 +1768,7 @@ Vue.component("product-review", {
       review: null,
       rating: null,
       recommend: null,
-      errors: []
+      errors: [],
     }
   },
   methods: {
@@ -1779,7 +1779,7 @@ Vue.component("product-review", {
           name: this.name,
           review: this.review,
           rating: this.rating,
-          recommend: this.recommend
+          recommend: this.recommend,
         }
         this.$emit("review-submitted", productReview)
         this.name = null
@@ -1792,20 +1792,20 @@ Vue.component("product-review", {
         if (!this.rating) this.errors.push("Rating required.")
         if (!this.recommend) this.errors.push("Recommendation required.")
       }
-    }
-  }
+    },
+  },
 })
 var app = new Vue({
   el: "#app",
   data: {
     premium: true,
-    cart: []
+    cart: [],
   },
   methods: {
     updateCart(id) {
       this.cart.push(id)
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -1950,8 +1950,8 @@ Vue.component("product", {
   props: {
     premium: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
     <div class="product">
@@ -1992,17 +1992,17 @@ Vue.component("product", {
           variantColor: "green",
           variantImage:
             "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
-          variantQuantity: 10
+          variantQuantity: 10,
         },
         {
           variantId: 2235,
           variantColor: "blue",
           variantImage:
             "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg",
-          variantQuantity: 0
-        }
+          variantQuantity: 0,
+        },
       ],
-      reviews: []
+      reviews: [],
     }
   },
   methods: {
@@ -2011,7 +2011,7 @@ Vue.component("product", {
     },
     updateProduct(index) {
       this.selectedVariant = index
-    }
+    },
   },
   computed: {
     title() {
@@ -2028,13 +2028,13 @@ Vue.component("product", {
         return "Free"
       }
       return 2.99
-    }
+    },
   },
   mounted() {
-    eventBus.$on("review-submitted", productReview => {
+    eventBus.$on("review-submitted", (productReview) => {
       this.reviews.push(productReview)
     })
-  }
+  },
 })
 Vue.component("product-review", {
   template: `
@@ -2067,7 +2067,7 @@ Vue.component("product-review", {
       name: null,
       review: null,
       rating: null,
-      errors: []
+      errors: [],
     }
   },
   methods: {
@@ -2077,7 +2077,7 @@ Vue.component("product-review", {
         let productReview = {
           name: this.name,
           review: this.review,
-          rating: this.rating
+          rating: this.rating,
         }
         eventBus.$emit("review-submitted", productReview)
         this.name = null
@@ -2088,15 +2088,15 @@ Vue.component("product-review", {
         if (!this.review) this.errors.push("Review required.")
         if (!this.rating) this.errors.push("Rating required.")
       }
-    }
-  }
+    },
+  },
 })
 Vue.component("product-tabs", {
   props: {
     reviews: {
       type: Array,
-      required: false
-    }
+      required: false,
+    },
   },
   template: `
     <div>
@@ -2128,19 +2128,19 @@ Vue.component("product-tabs", {
   data() {
     return {
       tabs: ["Reviews", "Make a Review"],
-      selectedTab: "Reviews"
+      selectedTab: "Reviews",
     }
-  }
+  },
 })
 Vue.component("info-tabs", {
   props: {
     shipping: {
-      required: true
+      required: true,
     },
     details: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   template: `
     <div>
@@ -2166,21 +2166,21 @@ Vue.component("info-tabs", {
   data() {
     return {
       tabs: ["Shipping", "Details"],
-      selectedTab: "Shipping"
+      selectedTab: "Shipping",
     }
-  }
+  },
 })
 var app = new Vue({
   el: "#app",
   data: {
     premium: true,
-    cart: []
+    cart: [],
   },
   methods: {
     updateCart(id) {
       this.cart.push(id)
-    }
-  }
+    },
+  },
 })
 ```
 

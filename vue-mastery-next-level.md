@@ -117,12 +117,12 @@ Starting code: [tag `progress-bar-start`](https://github.com/Code-Pop/real-world
 - Filters are stored in separate files like mixins. If you `export default`, the filter can be imported with any name you like.
 
   ```js
-  export default value => {
+  export default (value) => {
     const date = new Date(value)
     return date.toLocaleString(["en-US"], {
       month: "short",
       day: "2-digit",
-      year: "numeric"
+      year: "numeric",
     })
   }
   ```

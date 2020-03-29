@@ -93,7 +93,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
         capacity.value++
       }
       return { capacity, increaseCapacity }
-    }
+    },
   }
   </script>
   ```
@@ -130,7 +130,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
         capacity.value++
       }
       return { capacity, attending, spacesLeft, increaseCapacity }
-    }
+    },
   }
   </script>
   ```
@@ -163,13 +163,13 @@ You don't have to include all the code directly inside a massive `setup()` metho
         attending: ["Tim", "Bob", "Joe"],
         spacesLeft: computed(() => {
           return event.capacity - event.attending.length
-        })
+        }),
       })
       function increaseCapacity() {
         event.capacity++
       }
       return { ...toRefs(event), increaseCapacity }
-    }
+    },
   }
   </script>
   ```
@@ -202,7 +202,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
   export default {
     setup() {
       return useEventSpace()
-    }
+    },
   }
   function useEventSpace() {
     const capacity = ref(4)
@@ -261,7 +261,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
       return useEventSpace()
       // Additional components can be added, and the result destructured:
       // return { ...useEventSpace(), ...useMapping() }
-    }
+    },
   }
   </script>
   ```
@@ -287,7 +287,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
   export default {
     setup() {
       return { ...useEventSpace(), ...useMapping() }
-    }
+    },
   }
   </script>
   ```
@@ -324,7 +324,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
     onUnmounted,
     onActivated,
     onDeactivated,
-    onErrorCaptured
+    onErrorCaptured,
   } from "vue"
   export default {
     setup() {
@@ -355,7 +355,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
       onErrorCaptured(() => {
         console.log("Error Captured!")
       })
-    }
+    },
   }
   ```
 
@@ -393,7 +393,7 @@ You don't have to include all the code directly inside a massive `setup()` metho
         lastNameResults.value = eventApi.getEventCount(lastName.value)
       })
       return { searchInput, results }
-    }
+    },
   }
   </script>
   ```
@@ -454,7 +454,7 @@ export default {
       }
     })
     return { searchInput, results, loading, error }
-  }
+  },
 }
 </script>
 ```
@@ -507,7 +507,9 @@ import usePromise from "@/composables/use-promise"
 export default {
   setup() {
     const searchInput = ref("")
-    const getEvents = usePromise(search => eventApi.getEventCount(search.value))
+    const getEvents = usePromise((search) =>
+      eventApi.getEventCount(search.value)
+    )
 
     watch(searchInput, () => {
       if (searchInput.value !== "") {
@@ -517,7 +519,7 @@ export default {
       }
     })
     return { searchInput, getEvents }
-  }
+  },
 }
 </script>
 ```

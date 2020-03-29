@@ -111,7 +111,7 @@ Instructor: Adam Jahr
       new Vue({
         router,
         store,
-        render: h => h(App)
+        render: (h) => h(App),
       }).$mount("#app")
       ```
 
@@ -140,20 +140,21 @@ Instructor: Adam Jahr
       module.exports = {
         root: true,
         env: {
-          node: true
+          node: true,
         },
         extends: [
           "plugin:vue/essential",
           "plugin:prettier/recommended",
-          "@vue/prettier"
+          "@vue/prettier",
         ],
         rules: {
           "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-          "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
+          "no-debugger":
+            process.env.NODE_ENV === "production" ? "error" : "off",
         },
         parserOptions: {
-          parser: "babel-eslint"
-        }
+          parser: "babel-eslint",
+        },
       }
       ```
 
@@ -161,7 +162,7 @@ Instructor: Adam Jahr
 
       ```js
       module.exports = {
-        semi: false
+        semi: false,
       }
       ```
 
@@ -326,14 +327,14 @@ Instructor: Adam Jahr
           {
             path: "/",
             name: "home",
-            component: Home
+            component: Home,
           },
           {
             path: "/about",
             name: "about",
-            component: About
-          }
-        ]
+            component: About,
+          },
+        ],
       })
       ```
 
@@ -370,18 +371,18 @@ Instructor: Adam Jahr
           {
             path: "/",
             name: "home",
-            component: Home
+            component: Home,
           },
           {
             path: "/about-us",
             name: "about",
-            component: About
+            component: About,
           },
           {
             path: "/about",
-            redirect: { name: "about" }
-          }
-        ]
+            redirect: { name: "about" },
+          },
+        ],
       })
       ```
 
@@ -398,7 +399,7 @@ Instructor: Adam Jahr
       new Vue({
         router,
         store,
-        render: h => h(App)
+        render: (h) => h(App),
       }).$mount("#app")
       ```
 
@@ -526,7 +527,7 @@ Instructor: Adam Jahr
     </template>
     <script>
       export default {
-        props: ["username"]
+        props: ["username"],
       }
     </script>
     ```
@@ -547,7 +548,7 @@ Instructor: Adam Jahr
     ```js
     export default new Router({
       mode: "history",
-      routes: [...{ path: "*", component: NotFoundComponent }]
+      routes: [...{ path: "*", component: NotFoundComponent }],
     })
     ```
 
@@ -618,7 +619,7 @@ Instructor: Adam Jahr
         /Base[A-Z]\w+\.(vue|js)$/
       )
 
-      requireComponent.keys().forEach(fileName => {
+      requireComponent.keys().forEach((fileName) => {
         const componentConfig = requireComponent(fileName)
 
         const componentName = upperFirst(
@@ -631,7 +632,7 @@ Instructor: Adam Jahr
       new Vue({
         router,
         store,
-        render: h => h(App)
+        render: (h) => h(App),
       }).$mount("#app")
       ```
 
@@ -713,10 +714,10 @@ Instructor: Adam Jahr
         ```js
         axios
           .get("https://example.com/events")
-          .then(response => {
+          .then((response) => {
             console.log(response.data)
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error)
           })
         ```
@@ -805,8 +806,8 @@ Instructor: Adam Jahr
       withCredentials: false, // This is the default
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
 
     export default {
@@ -815,7 +816,7 @@ Instructor: Adam Jahr
       },
       getEvent(id) {
         return apiClient.get(`/events/${id}`)
-      }
+      },
     }
     ```
 
@@ -827,11 +828,11 @@ Instructor: Adam Jahr
 
     export default {
       components: {
-        EventCard
+        EventCard,
       },
       data() {
         return {
-          events: []
+          events: [],
         }
       },
       async created() {
@@ -841,7 +842,7 @@ Instructor: Adam Jahr
         } catch (e) {
           throw Error(e)
         }
-      }
+      },
     }
     ```
 
