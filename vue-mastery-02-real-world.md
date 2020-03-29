@@ -305,8 +305,8 @@ Instructor: Adam Jahr
 
   - **Server-side vs client-side routing**: client-side renders differences without reloading the page
 
-    <img src="img/vue-mastery-02-04-routing.jpg" alt="Server-side routing" width="60%">
-    <img src="img/vue-mastery-02-04-routing02.jpg" alt="Client-side routing" width="60%">
+    <img src="img/vue-mastery-02-04-routing-ssr.jpg" alt="Server-side routing" width="60%">
+    <img src="img/vue-mastery-02-04-routing-csr.jpg" alt="Client-side routing" width="60%">
 
   - **Single Page Applications (SPA)**: only one page is loaded, and navigation is done client-side.
   - **Named routes**:
