@@ -59,6 +59,46 @@
 
 ## 2. Writing a Unit Test with Jest
 
+We created a project with Vue CLI. Note that Vue CLI will create a directory with the name given, and initialize the Git repository.
+
+```sh
+~
+❯ cd ~/dev/vue-mastery
+
+~/dev/vue-mastery
+❯ vue create vue-mastery-testing-app
+```
+
+```
+Vue CLI v4.3.0
+? Please pick a preset: Manually select features
+? Check the features needed for your project: Babel, Router, Vuex, Linter, Unit
+? Use history mode for router? (Requires proper server setup for index fallback in production) Yes
+? Pick a linter / formatter config: Prettier
+? Pick additional lint features: Lint on save, Lint and fix on commit
+? Pick a unit testing solution: Jest
+? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files
+? Save this as a preset for future projects? (y/N) N
+```
+
+I then created the GitHub remote with the [GitHub CLI](https://cli.github.com/). My remote is at [br3ndonland/vue-mastery-testing-app](https://github.com/br3ndonland/vue-mastery-testing-app).
+
+```sh
+~/dev/vue-mastery
+❯ cd vue-mastery-testing-app
+
+~/dev/vue-mastery/vue-mastery-testing-app master
+❯ gh repo create br3ndonland/vue-mastery-testing-app --public --enable-issues=false --enable-wiki=false -d "Vue CLI 4 app for Vue Mastery testing course"
+✓ Created repository br3ndonland/vue-mastery-testing-app on GitHub
+✓ Added remote https://github.com/br3ndonland/vue-mastery-testing-app.git
+
+~/dev/vue-mastery/vue-mastery-testing-app master
+❯ git remote set-url origin git@github.com:br3ndonland/vue-mastery-testing-app.git
+
+~/dev/vue-mastery/vue-mastery-testing-app master
+❯ git pso master
+```
+
 ## 3. Testing Props & User Interaction
 
 ## 4. Testing Emitted Events
