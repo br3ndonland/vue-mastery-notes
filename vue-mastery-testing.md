@@ -11,6 +11,8 @@
   - [The component contract](#the-component-contract)
   - [What to test and not test](#what-to-test-and-not-test)
 - [2. Writing a Unit Test with Jest](#2-writing-a-unit-test-with-jest)
+  - [Vue CLI project creation](#vue-cli-project-creation)
+  - [Unit testing steps](#unit-testing-steps)
 - [3. Testing Props & User Interaction](#3-testing-props--user-interaction)
 - [4. Testing Emitted Events](#4-testing-emitted-events)
 - [5. Testing API Calls](#5-testing-api-calls)
@@ -59,7 +61,9 @@
 
 ## 2. Writing a Unit Test with Jest
 
-We created a project with Vue CLI. Note that Vue CLI will create a directory with the name given, and initialize the Git repository.
+### Vue CLI project creation
+
+We create a project with Vue CLI. Note that Vue CLI will create a directory with the name given, and initialize the Git repository.
 
 ```sh
 ~
@@ -98,6 +102,29 @@ I then created the GitHub remote with the [GitHub CLI](https://cli.github.com/).
 ~/dev/vue-mastery/vue-mastery-testing-app master
 ❯ git pso master
 ```
+
+### Unit testing steps
+
+1. **Create test suite** (block of tests): `describe()`
+2. **Set up tests**: `test()`
+3. **Mount component** with Vue Test Utils: `mount()`
+4. **Set data** if necessary: `setData()`
+5. **Assert** the expected result: `expect()`
+
+We create a new component, _AppHeader.vue_, and a test file, _AppHeader.spec.js_.
+
+- The component should display a logout button in the header if the user is logged in.
+- The input is `loggedIn`.
+- The output is the `<button>`.
+- We write tests for when users are logged in and logged out, according to the unit testing steps above.
+- We assert the expected result with [expect](https://jestjs.io/docs/en/expect) and [matchers](https://jestjs.io/docs/en/using-matchers).
+- We have to make the tests wait until the button is mounted to the DOM before they run, so we use async/await to [test asynchronous code](https://jestjs.io/docs/en/asynchronous).
+- Other things to note:
+  - Imports from Vue Test Utils use the JavaScript import syntax with curly braces, like `import { mount } from "@vue/test-utils"`, because we are importing specific method exports from Vue Test Utils. Vue component imports normally omit curly braces. See the [Vue Test Utils getting started docs](https://vue-test-utils.vuejs.org/guides/).
+  - After building _AppHeader.vue_, we import it into _App.vue_ and use it in the template. Although the title of _AppHeader.vue_ is `PascalCase`, we can apparently use the `kebab-case` variant directly in the template, `<app-header />`, without having to explicitly tell Vue.
+- We don't have a login functionality in the app right now, but we can try changing `loggedIn` with Vue devtools:
+
+  <img src="img/vm-testing-02-devtools.png" alt="Checking login button with Vue Dev Tools" width="600px">
 
 ## 3. Testing Props & User Interaction
 
