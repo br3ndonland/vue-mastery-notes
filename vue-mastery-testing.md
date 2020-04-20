@@ -14,6 +14,8 @@
   - [Vue CLI project creation](#vue-cli-project-creation)
   - [Unit testing steps](#unit-testing-steps)
 - [3. Testing Props & User Interaction](#3-testing-props--user-interaction)
+  - [Random number component](#random-number-component)
+  - [Random number component tests](#random-number-component-tests)
 - [4. Testing Emitted Events](#4-testing-emitted-events)
 - [5. Testing API Calls](#5-testing-api-calls)
 - [6. Stubbing Child Components](#6-stubbing-child-components)
@@ -132,6 +134,16 @@ We don't have a login functionality in the app right now, but we can try changin
 <img src="img/vm-testing-02-devtools.png" alt="Checking login button with Vue devtools" width="600px">
 
 ## 3. Testing Props & User Interaction
+
+### Random number component
+
+### Random number component tests
+
+#### Check default value
+
+#### Simulate user interaction
+
+#### Set different prop values
 
 ## 4. Testing Emitted Events
 
