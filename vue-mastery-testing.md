@@ -119,20 +119,23 @@ We create a new component, _AppHeader.vue_, and a test file, _AppHeader.spec.js_
 - We write tests for when users are logged in and logged out, according to the unit testing steps above.
 - We assert the expected result with [expect](https://jestjs.io/docs/en/expect) and [matchers](https://jestjs.io/docs/en/using-matchers).
 - We have to make the tests wait until the button is mounted to the DOM before they run, so we use async/await to [test asynchronous code](https://jestjs.io/docs/en/asynchronous).
-- Other things to note:
-  - Imports from Vue Test Utils use the JavaScript import syntax with curly braces, like `import { mount } from "@vue/test-utils"`, because we are importing specific method exports from Vue Test Utils. Vue component imports normally omit curly braces. See the [Vue Test Utils getting started docs](https://vue-test-utils.vuejs.org/guides/).
-  - After building _AppHeader.vue_, we import it into _App.vue_ and use it in the template. Although the title of _AppHeader.vue_ is `PascalCase`, we can apparently use the `kebab-case` variant directly in the template, `<app-header />`, without having to explicitly tell Vue.
-- We don't have a login functionality in the app right now, but we can try changing `loggedIn` with Vue devtools:
 
-  <img src="img/vm-testing-02-devtools.png" alt="Checking login button with Vue Dev Tools" width="600px">
+Other things to note:
+
+- Imports from Vue Test Utils use the JavaScript import syntax with curly braces, like `import { mount } from "@vue/test-utils"`, because we are importing specific method exports from Vue Test Utils. Vue component imports normally omit curly braces. See the [Vue Test Utils getting started docs](https://vue-test-utils.vuejs.org/guides/).
+- After building _AppHeader.vue_, we import it into _App.vue_ and use it in the template. Although the title of _AppHeader.vue_ is `PascalCase`, we can apparently use the `kebab-case` variant directly in the template, `<app-header />`, without having to explicitly tell Vue.
+- Lesson notes on `mount` vs `shallowMount`:
+  > In the Vue Test Utils you will also find the method `shallowMount()`. If your component has children, `shallowMount()` will return a simple implementation of that component instead of a fully rendered version. This is important because the focus of a unit test is the component in isolation and not the children of that component.
+
+We don't have a login functionality in the app right now, but we can try changing `loggedIn` with Vue devtools:
+
+<img src="img/vm-testing-02-devtools.png" alt="Checking login button with Vue devtools" width="600px">
 
 ## 3. Testing Props & User Interaction
 
 ## 4. Testing Emitted Events
 
 ## 5. Testing API Calls
-
-_To be released on April 7_
 
 ## 6. Stubbing Child Components
 
