@@ -11,6 +11,7 @@
   - [Automatic global registration of base components](#automatic-global-registration-of-base-components)
   - [@ shortcut](#-shortcut)
   - [Two-way computed properties](#two-way-computed-properties)
+  - [Single page apps vs server side rendered apps](#single-page-apps-vs-server-side-rendered-apps)
 - [Style guide](#style-guide)
   - [Priority A rules: essential](#priority-a-rules-essential)
   - [Priority B rules: strongly recommended](#priority-b-rules-strongly-recommended)
@@ -159,6 +160,22 @@ export default {
 
 <style scoped></style>
 ```
+
+### Single page apps vs server side rendered apps
+
+**SSR (server-side rendering)** is a strategy used by [Nuxt.js](https://nuxtjs.org/guide) and many other applications. Its approach is different from typical Vue.js apps.
+
+A typical Vue.js app is a **single-page application** (SPA). Rather than loading each page as the user navigates to it, an SPA loads all the content for the application initially, so that navigation is seamless. Although the navigation is smooth, SPAs typically have to load the JavaScript first, which can be slow.
+
+<img src="img/vm-nuxt-03-spa.jpg" alt="Diagram explaining single-page apps from Vue Mastery Nuxt.js course" width="600px" />
+
+Another approach is **SSR (server-side rendering)**. Nuxt.js calls SSR "Universal Mode."
+
+In this approach, the server runs the JavaScript and renders the site to HTML _before_ sending to the client's browser. This means the client's browser can display HTML even before the JavaScript is loaded, for fast load times. After the client has received the app’s JavaScript, the JavaScript then "hydrates" the HTML so it behaves like a normal SPA. Reportedly, **SSR is useful for applications with large amounts of API calls and data.**
+
+<img src="img/vm-nuxt-03-ssr.jpg" alt="Diagram explaining server-side rendering from Vue Mastery Nuxt.js course" width="600px" />
+
+The [`asyncData` method](https://nuxtjs.org/guide/async-data) in Nuxt.js enables server-side data operations to be performed before the application is rendered. This could be a powerful performance feature for teams that extensively leverage cloud infrastructure.
 
 ## Style guide
 
