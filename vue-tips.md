@@ -173,7 +173,7 @@ Adhere to best practices described in the [Vue.js Style Guide](https://vuejs.org
 
 ### Vuex
 
-- The convention is to write mutations in flux-style (capital letters with underscores, like `ACTION_NAME`). Vuex actions should be written in typical `camelCase`.
+- The convention is to write mutations in [flux](https://github.com/facebook/flux)-style (capital letters with underscores, like `ACTION_NAME`). Vuex actions should be written in typical `camelCase`.
 - Some teams [use constants for mutation types](https://vuex.vuejs.org/guide/mutations.html#using-constants-for-mutation-types). I prefer not to. Having a separate mutation types file means each new mutation added to a Vuex module has to also be added to the mutation types file. Team members frequently forget to do this.
 
 ## Linting and autoformatting
