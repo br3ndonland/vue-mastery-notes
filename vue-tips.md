@@ -12,10 +12,10 @@
   - [@ shortcut](#-shortcut)
   - [Two-way computed properties](#two-way-computed-properties)
   - [Single page apps vs server side rendered apps](#single-page-apps-vs-server-side-rendered-apps)
+  - [DOM templates vs render functions](#dom-templates-vs-render-functions)
 - [Style guide](#style-guide)
   - [Priority A rules: essential](#priority-a-rules-essential)
   - [Priority B rules: strongly recommended](#priority-b-rules-strongly-recommended)
-  - [DOM templates vs. render functions](#dom-templates-vs-render-functions)
   - [Vuex](#vuex)
 - [Linting and autoformatting](#linting-and-autoformatting)
 - [Tooling](#tooling)
@@ -177,20 +177,7 @@ In this approach, the server runs the JavaScript and renders the site to HTML _b
 
 The [`asyncData` method](https://nuxtjs.org/guide/async-data) in Nuxt.js enables server-side data operations to be performed before the application is rendered. This could be a powerful performance feature for teams that extensively leverage cloud infrastructure.
 
-## Style guide
-
-Adhere to best practices described in the [Vue.js Style Guide](https://vuejs.org/v2/style-guide).
-
-### Priority A rules: essential
-
-- Always include [prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential), specifying at least the prop type.
-
-### Priority B rules: strongly recommended
-
-- [Single-file component name casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended) should be consistently either PascalCase or kebab-case.
-- [Order of words in component names](https://vuejs.org/v2/style-guide/#Order-of-words-in-component-names-strongly-recommended) should go from general to specific, in PascalCase. For example, if there is a parent component _DataTable.vue_, a child component might be named _DataTableItem.vue_.
-
-### DOM templates vs. render functions
+### DOM templates vs render functions
 
 DOM templates mount the Vue instance to a DOM element [`el`](https://vuejs.org/v2/api/#el).
 
@@ -220,6 +207,19 @@ For more info, see:
 
 - [Vue.js Developers | Blog 20170917: Why you should avoid Vue.js DOM templates](https://vuejsdevelopers.com/2017/09/17/vue-js-avoid-dom-templates/)
 - [Vue.js Developers | Blog 20171205: What’s the deal with Vue’s virtual DOM?](https://vuejsdevelopers.com/2017/02/21/vue-js-virtual-dom/)
+
+## Style guide
+
+Adhere to best practices described in the [Vue.js Style Guide](https://vuejs.org/v2/style-guide).
+
+### Priority A rules: essential
+
+- Always include [prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential), specifying at least the prop type.
+
+### Priority B rules: strongly recommended
+
+- [Single-file component name casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended) should be consistently either PascalCase or kebab-case.
+- [Order of words in component names](https://vuejs.org/v2/style-guide/#Order-of-words-in-component-names-strongly-recommended) should go from general to specific, in PascalCase. For example, if there is a parent component _DataTable.vue_, a child component might be named _DataTableItem.vue_.
 
 ### Vuex
 
