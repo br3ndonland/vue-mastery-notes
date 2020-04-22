@@ -8,6 +8,12 @@
 
 ## Component anatomy
 
+**The three sections of a Vue component represent the three code languages that web browsers run**:
+
+1. HTML (structure, this is the `<template>` section of a Vue component)
+2. JavaScript (function, this is the `<script>` section of a Vue component)
+3. CSS (style, this is the `<style>` section of a Vue component)
+
 Also see [Vue.js docs - components basics](https://vuejs.org/v2/guide/components.html).
 
 ### Template
