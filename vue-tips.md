@@ -86,6 +86,60 @@ export default {
 <style scoped></style>
 ```
 
+## Features
+
+### Automatic global registration of base components
+
+[Component Registration - automatic global registration of base components](https://vuejs.org/v2/guide/components-registration.html#Automatic-Global-Registration-of-Base-Components):
+
+- Place components in _/components_
+- Start the name with `Base`, like `BaseButton`
+- You can use the component everywhere without having to import it.
+
+### @ shortcut
+
+`@` is an alias to `/src`. Helpful so you don't have to constantly type `../../` (for example, `../../components` could become `@/components`). Also, if you rearrange your components, the relative links won't be broken.
+
+### Two-way computed properties
+
+Instead of separate computed properties and watchers, [two-way computed properties](https://vuex.vuejs.org/guide/forms.html#two-way-computed-property) combine getters and setters, enabling use of v-model while pulling data from Vuex instead of storing locally.
+
+```vue
+<template>
+  <div>
+    <input v-model="message" />
+  </div>
+</template>
+
+<script>
+export default {
+  name: "component-name",
+  components: {  },
+  mixins: [],
+  props: {},
+  },
+  data() {
+    return {}
+  },
+  computed: {
+    message: {
+      get() {
+        return this.$store.state.obj.message
+      },
+      set(value) {
+        this.$store.commit("updateMessage", value)
+      },
+    },
+  },
+  watch: {},
+  created() {},
+  methods: {},
+}
+</script>
+
+<style scoped></style>
+```
+
 ## Style guide
 
 Adhere to best practices described in the [Vue.js Style Guide](https://vuejs.org/v2/style-guide).
