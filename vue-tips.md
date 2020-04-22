@@ -221,6 +221,14 @@ For JavaScript linting and autoformatting, use [ESLint](https://eslint.org/), [T
 
 Prettier extensions are available for [VSCode](https://github.com/prettier/prettier-vscode), [Vim](https://github.com/prettier/vim-prettier), [Emacs](https://github.com/prettier/prettier-emacs), [Atom](https://github.com/prettier/prettier-atom), and [Sublime Text](https://packagecontrol.io/packages/JsPrettier).
 
+_.prettierrc_
+
+```json
+{
+  "semi": false
+}
+```
+
 _.eslintrc_
 
 ```json
@@ -247,14 +255,6 @@ _.eslintrc_
     "vue/multiline-html-element-content-newline": 0,
     "vue/singleline-html-element-content-newline": 0
   }
-}
-```
-
-_.prettierrc_
-
-```json
-{
-  "semi": false
 }
 ```
 
