@@ -86,24 +86,23 @@ export default {
 <style scoped></style>
 ```
 
-## Best practices
+## Style guide
 
 Adhere to best practices described in the [Vue.js Style Guide](https://vuejs.org/v2/style-guide).
 
-### Component names
+### Priority A rules: essential
 
-- [Component names should always be multi-word](https://vuejs.org/v2/style-guide/#Multi-word-component-names-essential).
-- [Order of words in component names](https://vuejs.org/v2/style-guide/#Order-of-words-in-component-names-strongly-recommended) should go from general to specific.
-- [Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended) should always be either kebab-case or PascalCase.
+- Always include [prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential), specifying at least the prop type.
 
-### Name case
+### Priority B rules: strongly recommended
 
-- Use `camelCase` for all functions, methods, and actions.
-- Use `UPPERCASE_UNDERSCORES` for Vuex mutations only, not for Vuex actions.
+- [Single-file component name casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended) should be consistently either PascalCase or kebab-case.
+- [Order of words in component names](https://vuejs.org/v2/style-guide/#Order-of-words-in-component-names-strongly-recommended) should go from general to specific, in PascalCase. For example, if there is a parent component _DataTable.vue_, a child component might be named _DataTableItem.vue_.
 
-### Props
+### Vuex
 
-- Always use object notation for [prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential), specifying at least the prop type.
+- The convention is to write mutations in flux-style (capital letters with underscores, like `ACTION_NAME`). Vuex actions should be written in typical `camelCase`.
+- Some teams [use constants for mutation types](https://vuex.vuejs.org/guide/mutations.html#using-constants-for-mutation-types). I prefer not to. Having a separate mutation types file means each new mutation added to a Vuex module has to also be added to the mutation types file. Team members frequently forget to do this.
 
 ## Linting and autoformatting
 
