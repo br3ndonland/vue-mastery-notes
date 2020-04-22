@@ -46,7 +46,7 @@ CSS and SCSS go here.
 
 ### Example
 
-```html
+```vue
 <template>
   <div>
     <!-- <other-component></other-component> -->
@@ -54,33 +54,33 @@ CSS and SCSS go here.
 </template>
 
 <script>
-  // import OtherComponent from "other-component.vue"
-  // import { Mixin } from "mixins/Mixin.js"
-  export default {
-    name: "component-name",
-    components: {
-      // "other-component": OtherComponent
+// import OtherComponent from "other-component.vue"
+// import { Mixin } from "mixins/Mixin.js"
+export default {
+  name: "component-name",
+  components: {
+    // "other-component": OtherComponent
+  },
+  mixins: [],
+  props: {
+    prop1: Number,
+    prop2: {
+      type: String,
+      required: true,
+      default: `Hello, World!`,
     },
-    mixins: [],
-    props: {
-      prop1: Number,
-      prop2: {
-        type: String,
-        required: true,
-        default: `Hello, World!`,
-      },
-    },
-    data() {
-      return {
-        key1: value1,
-        key2: value2,
-      }
-    },
-    computed: {},
-    watch: {},
-    created() {},
-    methods: {},
-  }
+  },
+  data() {
+    return {
+      key1: value1,
+      key2: value2,
+    }
+  },
+  computed: {},
+  watch: {},
+  created() {},
+  methods: {},
+}
 </script>
 
 <style scoped></style>
