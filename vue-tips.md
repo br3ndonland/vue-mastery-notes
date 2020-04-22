@@ -1,4 +1,4 @@
-# Vue.js guide
+# Vue.js tips
 
 ## Learning resources
 
