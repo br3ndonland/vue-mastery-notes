@@ -1,5 +1,23 @@
 # Vue.js tips
 
+## Table of Contents <!-- omit in toc -->
+
+- [Learning resources](#learning-resources)
+- [Component anatomy](#component-anatomy)
+  - [Template](#template)
+  - [Script](#script)
+  - [Example](#example)
+- [Features](#features)
+  - [Automatic global registration of base components](#automatic-global-registration-of-base-components)
+  - [@ shortcut](#-shortcut)
+  - [Two-way computed properties](#two-way-computed-properties)
+- [Style guide](#style-guide)
+  - [Priority A rules: essential](#priority-a-rules-essential)
+  - [Priority B rules: strongly recommended](#priority-b-rules-strongly-recommended)
+  - [Vuex](#vuex)
+- [Linting and autoformatting](#linting-and-autoformatting)
+- [Tooling](#tooling)
+
 ## Learning resources
 
 - [Vue Mastery](https://www.vuemastery.com)
