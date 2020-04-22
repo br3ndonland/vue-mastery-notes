@@ -111,6 +111,7 @@ export default {
 
 [Component Registration - automatic global registration of base components](https://vuejs.org/v2/guide/components-registration.html#Automatic-Global-Registration-of-Base-Components):
 
+- Add base component settings to the app's entry file (usually _src/main.js_).
 - Place components in _/components_
 - Start the name with `Base`, like `BaseButton`
 - You can use the component everywhere without having to import it.
