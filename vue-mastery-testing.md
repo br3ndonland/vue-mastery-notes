@@ -138,7 +138,7 @@ We don't have a login functionality in the app right now, but we can try changin
 ### Random number component
 
 - We create a component that accepts `min` and `max` props as inputs, and generates a random number between `min` and `max` as the output.
-- See [src/components/RandomNumber.vue](https://github.com/br3ndonland/vue-mastery-testing-app/blob/master/src/components/RandomNumber.vue).
+- See _[src/components/RandomNumber.vue](https://github.com/br3ndonland/vue-mastery-testing-app/blob/master/src/components/RandomNumber.vue)_.
 
 ### Random number component tests
 
@@ -150,11 +150,47 @@ Tests to write:
 
 As explained in the first lesson, we don't need to test prop types. **If the component has prop types and defaults specified, those will be checked by the Vue core library itself, and don't need further unit tests.**
 
-#### Check default value
+_[tests/unit/RandomNumber.spec.js](https://github.com/br3ndonland/vue-mastery-testing-app/blob/master/tests/unit/RandomNumber.spec.js)_
 
-#### Simulate user interaction
+```js
+describe("RandomNumber", () => {
+  test("Check default value: randomNumber default should be 0", () => {
+    const wrapper = mount(RandomNumber)
+    expect(wrapper.html()).toContain("<span>0</span>")
+  })
+  test("Simulate interaction: button -> 0 < randomNumber < 10", async () => {
+    const wrapper = mount(RandomNumber)
+    wrapper.find("button").trigger("click")
+    await wrapper.vm.$nextTick()
+    const randomNumber = parseInt(wrapper.find("span").element.textContent)
+    expect(randomNumber).toBeGreaterThanOrEqual(1)
+    expect(randomNumber).toBeLessThanOrEqual(10)
+  })
+  test("Change prop values: new min < randomNumber < new max", async () => {
+    const wrapper = mount(RandomNumber, {
+      propsData: {
+        min: 200,
+        max: 300,
+      },
+    })
+    wrapper.find("button").trigger("click")
+    await wrapper.vm.$nextTick()
+    const randomNumber = parseInt(wrapper.find("span").element.textContent)
+    expect(randomNumber).toBeGreaterThanOrEqual(200)
+    expect(randomNumber).toBeLessThanOrEqual(300)
+  })
+})
+```
 
-#### Set different prop values
+In the third test where we change prop values, we change the props in a slightly different manner than we did in _AppHeader.spec.js_ during lesson 2. If we attempt to set the data using `wrapper.setData({ min: 200, max: 300 })` after mounting `RandomNumber`, the test passes with two warnings:
+
+```
+[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "min"
+
+[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "max"
+```
+
+To avoid these warnings, set the props when mounting the component, using `propsData`.
 
 ## 4. Testing Emitted Events
 
