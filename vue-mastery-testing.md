@@ -137,6 +137,9 @@ We don't have a login functionality in the app right now, but we can try changin
 
 ### Random number component
 
+- We create a component that accepts `min` and `max` props as inputs, and generates a random number between `min` and `max` as the output.
+- See [src/components/RandomNumber.vue](https://github.com/br3ndonland/vue-mastery-testing-app/blob/master/src/components/RandomNumber.vue).
+
 ### Random number component tests
 
 #### Check default value
