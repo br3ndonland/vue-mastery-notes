@@ -118,7 +118,7 @@ We create a new component, _AppHeader.vue_, and a test file, _AppHeader.spec.js_
 - The component should display a logout button in the header if the user is logged in.
 - The input is `loggedIn`.
 - The output is the `<button>`.
-- We write tests for when users are logged in and logged out, according to the unit testing steps above.
+- We write tests using the [test method](https://jestjs.io/docs/en/api#testname-fn-timeout) for when users are logged in and logged out, according to the unit testing steps above.
 - We assert the expected result with [expect](https://jestjs.io/docs/en/expect) and [matchers](https://jestjs.io/docs/en/using-matchers).
 - We have to make the tests wait until the button is mounted to the DOM before they run, so we use async/await to [test asynchronous code](https://jestjs.io/docs/en/asynchronous).
 
