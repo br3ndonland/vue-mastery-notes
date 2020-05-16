@@ -194,6 +194,22 @@ To avoid these warnings, set the props when mounting the component, using `props
 
 ## 4. Testing Emitted Events
 
+We follow our unit testing steps:
+
+1. **Create test suite** (block of tests): `describe()`
+2. **Set up tests**: `test()`
+3. **Mount component** with Vue Test Utils: `mount()`
+4. **Set data** if necessary: `setData()`
+5. **Assert** the expected result: `expect()`
+
+When setting up tests (step 2), it helps to break down the test suite into steps based on how users will interact with the application:
+
+1. **Find text input**
+2. **Set value for text input**
+3. **Simulate form submission**
+4. **Assert event has been emitted**
+5. **Assert payload is correct**
+
 ## 5. Testing API Calls
 
 ## 6. Stubbing Child Components
