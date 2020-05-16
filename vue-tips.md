@@ -14,6 +14,7 @@
   - [Two-way computed properties](#two-way-computed-properties)
   - [Single page apps vs server side rendered apps](#single-page-apps-vs-server-side-rendered-apps)
   - [DOM templates vs render functions](#dom-templates-vs-render-functions)
+  - [Hash mode vs history mode](#hash-mode-vs-history-mode)
 - [Style guide](#style-guide)
   - [Priority A rules: essential](#priority-a-rules-essential)
   - [Priority B rules: strongly recommended](#priority-b-rules-strongly-recommended)
@@ -214,6 +215,18 @@ For more info, see:
 
 - [Vue.js Developers | Blog 20170917: Why you should avoid Vue.js DOM templates](https://vuejsdevelopers.com/2017/09/17/vue-js-avoid-dom-templates/)
 - [Vue.js Developers | Blog 20171205: What’s the deal with Vue’s virtual DOM?](https://vuejsdevelopers.com/2017/02/21/vue-js-virtual-dom/)
+
+### Hash mode vs history mode
+
+The default mode for Vue Router is **hash mode**, which uses a `#` to simulate a full URL so the page doesn't reload when the URL changes. Vue Router also offers **[HTML5 history mode](https://router.vuejs.org/guide/essentials/history-mode.html)**, which uses the [`history.pushState` API](https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API) for navigation. Implementing history mode is a [three step process](https://router.vuejs.org/guide/essentials/history-mode.html):
+
+1. Change `mode: "hash"` to `mode: "history"` in the `VueRouter` instance
+2. Update server config
+3. Create fallback for 404s
+
+History mode is preferred. Hash mode is only necessary if you don't have access to the server, or if you need to support a [browser that hasn't implemented `history.pushState`](https://caniuse.com/#feat=mdn-api_history_pushstate).
+
+The 404 fallback can either be implemented on the front-end with an additional component, or directly in the [routing config for server-side rendered apps](https://ssr.vuejs.org/guide/routing.html).
 
 ## Style guide
 
