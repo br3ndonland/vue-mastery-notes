@@ -6,6 +6,7 @@
 - [Component anatomy](#component-anatomy)
   - [Template](#template)
   - [Script](#script)
+  - [Style](#style)
   - [Example](#example)
 - [Features](#features)
   - [Automatic global registration of base components](#automatic-global-registration-of-base-components)
@@ -60,7 +61,7 @@ The following order of exports is suggested based on [`eslint-plugin-vue`](https
 - `created()`
 - `methods`
 
-#### Style
+### Style
 
 CSS and SCSS go here.
 
