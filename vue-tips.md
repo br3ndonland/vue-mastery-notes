@@ -10,7 +10,7 @@
   - [Example](#example)
 - [Features](#features)
   - [Automatic global registration of base components](#automatic-global-registration-of-base-components)
-  - [@ shortcut](#-shortcut)
+  - [@ alias](#-alias)
   - [Two-way computed properties](#two-way-computed-properties)
   - [Single page apps vs server side rendered apps](#single-page-apps-vs-server-side-rendered-apps)
   - [DOM templates vs render functions](#dom-templates-vs-render-functions)
@@ -118,9 +118,11 @@ export default {
 - Start the name with `Base`, like `BaseButton`
 - You can use the component everywhere without having to import it.
 
-### @ shortcut
+### @ alias
 
 `@` is an alias to `/src`. Helpful so you don't have to constantly type `../../` (for example, `../../components` could become `@/components`). Also, if you rearrange your components, the relative links won't be broken.
+
+Nuxt.js uses aliases for its [directory structure](https://nuxtjs.org/guide/directory-structure).
 
 ### Two-way computed properties
 
