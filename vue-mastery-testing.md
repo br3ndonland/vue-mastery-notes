@@ -17,6 +17,10 @@
   - [Random number component](#random-number-component)
   - [Random number component tests](#random-number-component-tests)
 - [4. Testing Emitted Events](#4-testing-emitted-events)
+  - [Breaking down the test into steps](#breaking-down-the-test-into-steps)
+  - [Finding the text input element and setting the value](#finding-the-text-input-element-and-setting-the-value)
+  - [Simulating form submission](#simulating-form-submission)
+  - [Testing emitted event and payload](#testing-emitted-event-and-payload)
 - [5. Testing API Calls](#5-testing-api-calls)
 - [6. Stubbing Child Components](#6-stubbing-child-components)
 - [7. Testing Vuex](#7-testing-vuex)
@@ -194,6 +198,8 @@ To avoid these warnings, set the props when mounting the component, using `props
 
 ## 4. Testing Emitted Events
 
+### Breaking down the test into steps
+
 We follow our unit testing steps:
 
 1. **Create test suite** (block of tests): `describe()`
@@ -209,6 +215,22 @@ When setting up tests (step 2), it helps to break down the test suite into steps
 3. **Simulate form submission**
 4. **Assert event has been emitted**
 5. **Assert payload is correct**
+
+### Finding the text input element and setting the value
+
+The simplest method for locating the text input element to test is to search for the input type directly: `const input = wrapper.find('input[type="text"]')`. However, in the future, more input elements could be added, or the input type could change.
+
+To make our location method more specific, we can assign a test-specific attribute to the element. This decouples the test from the implementation details of the component.
+
+### Simulating form submission
+
+In order to decouple the test from the component, we don't want to make the test dependent on the submit button. Instead, we can use `wrapper.trigger("submit")` to simulate form submission without a submit button.
+
+### Testing emitted event and payload
+
+We start by simply checking that the event has been emitted from the component.
+
+We then test the specific form value in the test submission. The form submission value is nested inside some JSON arrays, so we use `wrapper.emitted("formSubmitted")[0][0]` to locate the value.
 
 ## 5. Testing API Calls
 
