@@ -22,6 +22,13 @@
   - [Simulating form submission](#simulating-form-submission)
   - [Testing emitted event and payload](#testing-emitted-event-and-payload)
 - [5. Testing API Calls](#5-testing-api-calls)
+  - [Setting up the database](#setting-up-the-database)
+  - [Setting up the message display component](#setting-up-the-message-display-component)
+  - [Setting up a test for the message display component](#setting-up-a-test-for-the-message-display-component)
+  - [Mocking API calls](#mocking-api-calls)
+  - [Awaiting promise resolution](#awaiting-promise-resolution)
+  - [Asserting `expect()`ed outcomes](#asserting-expected-outcomes)
+  - [Getting the correct number of API calls by clearing mocks](#getting-the-correct-number-of-api-calls-by-clearing-mocks)
 - [6. Stubbing Child Components](#6-stubbing-child-components)
 - [7. Testing Vuex](#7-testing-vuex)
 - [8. Testing Vue Router](#8-testing-vue-router)
@@ -233,6 +240,106 @@ We start by simply checking that the event has been emitted from the component.
 We then test the specific form value in the test submission. The form submission value is nested inside some JSON arrays, so we use `wrapper.emitted("formSubmitted")[0][0]` to locate the value.
 
 ## 5. Testing API Calls
+
+### Setting up the database
+
+We create a small JSON database in _db.json_ with `json-server`. Spin it up with `json-server --watch db.json`. We also add an API service layer in _services/axios.js_, to simplify API calls with Axios. This consolidates our API calls into one file.
+
+```js
+import axios from "axios"
+
+export async function getMessage() {
+  const r = await axios(`http://localhost:3000/message`)
+  return r.data
+}
+```
+
+### Setting up the message display component
+
+_MessageDisplay.vue_ is a small notification container.
+
+```vue
+<template>
+  <p v-if="error" data-testid="message-error">{{ error }}</p>
+  <p v-else data-testid="message">{{ message.text }}</p>
+</template>
+<script>
+import { getMessage } from "@/services/axios.js"
+export default {
+  data() {
+    return {
+      message: {},
+      error: null,
+    }
+  },
+  async created() {
+    try {
+      this.message = await getMessage()
+    } catch (e) {
+      this.error = `Error: ${e}`
+      throw Error(e)
+    }
+  },
+}
+</script>
+<style scoped></style>
+```
+
+### Setting up a test for the message display component
+
+Again, we follow our unit testing steps:
+
+1. **Create test suite** (block of tests): `describe()`
+2. **Set up tests**: `test()`
+3. **Mount component** with Vue Test Utils: `mount()`
+4. **Set data** if necessary: `setData()`
+5. **Assert** the expected result: `expect()`
+
+We also break down each test into steps:
+
+1. **Mock API call**
+2. **Await promise resolution**
+3. **Assert that API call happened once**: `expect()`
+4. **Assert that component displays message**: `expect()`
+
+### Mocking API calls
+
+Relying on actual back-end API calls would couple our tests to the back-end, and prevent us from running tests in continuous integration (CI). To decouple our tests from the back-end, we **mock** the API calls with the [Jest Mock Functions API](https://jestjs.io/docs/en/mock-functions), particularly [`mockResolvedValueOnce()`](https://jestjs.io/docs/en/mock-function-api.html#mockfnmockresolvedvalueoncevalue).
+
+In addition to mocking successful API calls, we also need to mock failed API calls. For this, we use [`mockRejectedValueOnce()`](https://jestjs.io/docs/en/mock-function-api.html#mockfnmockrejectedvalueoncevalue).
+
+### Awaiting promise resolution
+
+We're testing a method inside the component's `created()` lifecycle hook. Vue Test Utils can't `await` promises inside the `created()` hook, so we use [`flush-promises`](https://www.npmjs.com/package/flush-promises) to ensure promises are resolved prior to running assertions with `expect()`.
+
+### Asserting `expect()`ed outcomes
+
+We use the Jest `expect()` method to assert two expected outcomes:
+
+1. The API call is made the correct number of times (1)
+2. The message contains the expected content
+
+To evaluate the content of the message, we have to parse the `textContent` of the HTML element:
+
+```js
+const errorContent = wrapper.find(`[data-testid="message-error"]`).element
+  .textContent
+```
+
+Note the square brackets around the attribute to be found. As we saw in the previous lesson, HTML elements go outside the square brackets, attributes of those elements go inside the square brackets. Here, we're simply looking for the attribute and remaining agnostic to the element used for it, which gives the test added flexibility.
+
+### Getting the correct number of API calls by clearing mocks
+
+The second test will fail because it sees two API calls. The mock API call from the first test has not been cleared out by Jest. We need to tell Jest to `clearAllMocks()` by adding a method to the beginning of _MessageDisplay.spec.js_.
+
+```js
+jest.mock("@/services/axios")
+beforeEach(() => {
+  jest.clearAllMocks()
+})
+```
+
+Note that this can also be [specified in the Jest config](https://jestjs.io/docs/en/configuration#clearmocks-boolean) (either in _package.json_ or _jest.config.js_).
 
 ## 6. Stubbing Child Components
 
