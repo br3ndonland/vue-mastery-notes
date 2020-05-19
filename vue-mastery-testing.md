@@ -29,6 +29,7 @@
   - [Awaiting promise resolution](#awaiting-promise-resolution)
   - [Asserting `expect()`ed outcomes](#asserting-expected-outcomes)
   - [Getting the correct number of API calls by clearing mocks](#getting-the-correct-number-of-api-calls-by-clearing-mocks)
+  - [Refactoring](#refactoring)
 - [6. Stubbing Child Components](#6-stubbing-child-components)
 - [7. Testing Vuex](#7-testing-vuex)
 - [8. Testing Vue Router](#8-testing-vue-router)
@@ -340,6 +341,39 @@ beforeEach(() => {
 ```
 
 Note that this can also be [specified in the Jest config](https://jestjs.io/docs/en/configuration#clearmocks-boolean) (either in _package.json_ or _jest.config.js_).
+
+### Refactoring
+
+In the lesson, we used `expect().toEqual()` when asserting the error message. The `toEqual()` method requires strict/exact equality, which won't work if any text is added to the error message, such as from a template string. Using `toContain()` instead allows Jest to do a regex search inside the
+error string.
+
+I wanted to consolidate the try/catch error handling into the API call in _axios.js_. I tried this, but throwing an error from `getMessage()` in _axios.js_, then calling `getMessage()` from within the `created()` hook in _MessageDisplay.vue_ results in a Jest error:
+
+```
+ FAIL  tests/unit/MessageDisplay.spec.js
+  ● MessageDisplay › displays an error if getMessage fails
+
+    TypeError: Cannot read property 'textContent' of undefined
+
+      34 |     expect(getMessage).toHaveBeenCalledTimes(1)
+      35 |     // 4. Assert that component displays message
+    > 36 |     const errorContent = wrapper.find(`[data-testid="message-error"]`).element
+         |                          ^
+      37 |       .textContent
+      38 |     expect(errorContent).toContain(mockError)
+      39 |   })
+
+      at Object.<anonymous> (tests/unit/MessageDisplay.spec.js:36:26)
+```
+
+This is odd, because Vue doesn't throw any errors. Vue returns a warning when errors are thrown in `created()` lifecycle hooks, but the element mounts and renders in the actual app. In the browser console, the element content shows up:
+
+```js
+>>> document.querySelector("[data-testid=message-error]").textContent
+"Network Error: getMessage could not connect to the database."
+```
+
+Removing `.element` to match the browser console doesn't change the result.
 
 ## 6. Stubbing Child Components
 
