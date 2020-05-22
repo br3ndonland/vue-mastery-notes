@@ -375,6 +375,8 @@ This is odd, because Vue doesn't throw any errors. Vue returns a warning when er
 
 Removing `.element` to match the browser console doesn't change the result.
 
+There may be a different [Jest matcher](https://jestjs.io/docs/en/using-matchers) I could use, or some [DOM manipulation](https://jestjs.io/docs/en/tutorial-jquery) I could do.
+
 ## 6. Stubbing Child Components
 
 _To be released on May 5_
