@@ -172,8 +172,7 @@ describe("RandomNumber", () => {
   })
   test("Simulate interaction: button -> 0 < randomNumber < 10", async () => {
     const wrapper = mount(RandomNumber)
-    wrapper.find("button").trigger("click")
-    await wrapper.vm.$nextTick()
+    await wrapper.find("button").trigger("click")
     const randomNumber = parseInt(wrapper.find("span").element.textContent)
     expect(randomNumber).toBeGreaterThanOrEqual(1)
     expect(randomNumber).toBeLessThanOrEqual(10)
@@ -185,13 +184,23 @@ describe("RandomNumber", () => {
         max: 300,
       },
     })
-    wrapper.find("button").trigger("click")
-    await wrapper.vm.$nextTick()
+    await wrapper.find("button").trigger("click")
     const randomNumber = parseInt(wrapper.find("span").element.textContent)
     expect(randomNumber).toBeGreaterThanOrEqual(200)
     expect(randomNumber).toBeLessThanOrEqual(300)
   })
 })
+```
+
+_Update:_ For vue-test-utils ≥[v1.0.0](https://github.com/vuejs/vue-test-utils/releases/tag/v1.0.0), the `vm.$nextTick()` from the lesson code can be removed, and DOM methods can be directly `await`ed instead.
+
+```js
+// before
+wrapper.find("button").trigger("click")
+await wrapper.vm.$nextTick()
+
+// after
+await wrapper.find("button").trigger("click")
 ```
 
 In the third test where we change prop values, we change the props in a slightly different manner than we did in _AppHeader.spec.js_ during lesson 2. If we attempt to set the data using `wrapper.setData({ min: 200, max: 300 })` after mounting `RandomNumber`, the test passes with two warnings:
