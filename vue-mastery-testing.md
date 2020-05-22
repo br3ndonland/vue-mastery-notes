@@ -388,7 +388,17 @@ There may be a different [Jest matcher](https://jestjs.io/docs/en/using-matchers
 
 ## 6. Stubbing Child Components
 
-_To be released on May 5_
+A **stub** is a substitute version of a component for testing. Advantages:
+
+- Isolate what you're testing
+- Test one thing at a time
+- Pinpoint the specific code that's broken
+
+This concept is similar to [Jest manual mocks](https://jestjs.io/docs/en/manual-mocks), which allow you to mock entire components or Node modules.
+
+Stubs should be used sparingly. Overuse of stubs increases the maintenance cost of your tests, because you depend on manually written stubs.
+
+In addition to `mount()`, Jest also offers a `shallowMount()` method, which only mounts the component being tested without the rest of the component hierarchy. Use of `shallowMount()` can have the same disadvantages as overuse of stubs, and is not always supported in other libraries like [Vue Testing Library](https://testing-library.com/docs/vue-testing-library/intro). Vue Testing Library [favors](https://testing-library.com/docs/guiding-principles) testing DOM nodes over isolated components. For more about `mount()` vs `shallowMount()`, listen to the [Enjoy the Vue podcast episode 9](https://enjoythevue.io/episodes/9/).
 
 ## 7. Testing Vuex
 
