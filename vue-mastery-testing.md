@@ -33,13 +33,13 @@
 - [6. Stubbing Child Components](#6-stubbing-child-components)
   - [Stubbing](#stubbing)
   - [`mount()` vs `shallowMount()`](#mount-vs-shallowmount)
-  - [Upgrading Vue Test Utils](#upgrading-vue-test-utils)
-  - [Removing `nextTick()` and `await`ing DOM methods instead](#removing-nexttick-and-awaiting-dom-methods-instead)
-  - [Correcting the `isVisible()` deprecation warning](#correcting-the-isvisible-deprecation-warning)
-  - [Avoiding use of strings for stubs](#avoiding-use-of-strings-for-stubs)
 - [7. ~~Testing Vuex~~](#7-stesting-vuexs)
 - [8. ~~Testing Vue Router~~](#8-stesting-vue-routers)
 - [Production unit testing course](#production-unit-testing-course)
+- [Upgrading Vue Test Utils](#upgrading-vue-test-utils)
+  - [Removing `nextTick()` and `await`ing DOM methods instead](#removing-nexttick-and-awaiting-dom-methods-instead)
+  - [Correcting the `isVisible()` deprecation warning](#correcting-the-isvisible-deprecation-warning)
+  - [Avoiding use of strings for stubs](#avoiding-use-of-strings-for-stubs)
 
 ## 1. What to test
 
@@ -477,7 +477,19 @@ Stubs should be used sparingly. Overuse of stubs increases the maintenance cost 
 
 In addition to `mount()`, Jest also offers a `shallowMount()` method, which only mounts the component being tested without the rest of the component hierarchy. Use of `shallowMount()` can have the same disadvantages as overuse of stubs, and is not always supported in other libraries like [Vue Testing Library](https://testing-library.com/docs/vue-testing-library/intro). Vue Testing Library [favors](https://testing-library.com/docs/guiding-principles) testing DOM nodes over isolated components. For more about `mount()` vs `shallowMount()`, listen to the [Enjoy the Vue podcast episode 9](https://enjoythevue.io/episodes/9/).
 
-### Upgrading Vue Test Utils
+## 7. ~~Testing Vuex~~
+
+~~To be released on May 12~~
+
+## 8. ~~Testing Vue Router~~
+
+~~To be released on May 19~~
+
+## Production unit testing course
+
+**This course was originally going to have lessons on testing Vuex and Vue Router, but the lessons were moved to a separate upcoming course.**
+
+## Upgrading Vue Test Utils
 
 Vue Test Utils 1.0 is [here](https://github.com/vuejs/vue-test-utils/releases). There were a couple of updates to make to the tests after upgrading Vue Test Utils.
 
@@ -570,15 +582,3 @@ describe("MessageContainer", () => {
   })
 })
 ```
-
-## 7. ~~Testing Vuex~~
-
-~~To be released on May 12~~
-
-## 8. ~~Testing Vue Router~~
-
-~~To be released on May 19~~
-
-## Production unit testing course
-
-**This course was originally going to have lessons on testing Vuex and Vue Router, but the lessons were moved to a separate upcoming course.**
