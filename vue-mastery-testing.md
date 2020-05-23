@@ -37,8 +37,9 @@
   - [Removing `nextTick()` and `await`ing DOM methods instead](#removing-nexttick-and-awaiting-dom-methods-instead)
   - [Correcting the `isVisible()` deprecation warning](#correcting-the-isvisible-deprecation-warning)
   - [Avoiding use of strings for stubs](#avoiding-use-of-strings-for-stubs)
-- [7. Testing Vuex](#7-testing-vuex)
-- [8. Testing Vue Router](#8-testing-vue-router)
+- [7. ~~Testing Vuex~~](#7-stesting-vuexs)
+- [8. ~~Testing Vue Router~~](#8-stesting-vue-routers)
+- [Production unit testing course](#production-unit-testing-course)
 
 ## 1. What to test
 
@@ -570,10 +571,14 @@ describe("MessageContainer", () => {
 })
 ```
 
-## 7. Testing Vuex
+## 7. ~~Testing Vuex~~
 
-_To be released on May 12_
+~~To be released on May 12~~
 
-## 8. Testing Vue Router
+## 8. ~~Testing Vue Router~~
 
-_To be released on May 19_
+~~To be released on May 19~~
+
+## Production unit testing course
+
+**This course was originally going to have lessons on testing Vuex and Vue Router, but the lessons were moved to a separate upcoming course.**
