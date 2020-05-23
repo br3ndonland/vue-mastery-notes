@@ -353,8 +353,7 @@ Note that this can also be [specified in the Jest config](https://jestjs.io/docs
 
 ### Refactoring
 
-In the lesson, we used `expect().toEqual()` when asserting the error message. The `toEqual()` method requires strict/exact equality, which won't work if any text is added to the error message, such as from a template string. Using `toContain()` instead allows Jest to do a regex search inside the
-error string.
+In the lesson, we used `expect().toEqual()` when asserting the error message. The `toEqual()` method requires strict/exact equality, which won't work if any text is added to the error message, such as from a template string. Using `toContain()` instead allows Jest to do a regex search inside the error string.
 
 I wanted to consolidate the try/catch error handling into the API call in _axios.js_. I tried this, but throwing an error from `getMessage()` in _axios.js_, then calling `getMessage()` from within the `created()` hook in _MessageDisplay.vue_ results in a Jest error:
 
@@ -385,6 +384,73 @@ This is odd, because Vue doesn't throw any errors. Vue returns a warning when er
 Removing `.element` to match the browser console doesn't change the result.
 
 There may be a different [Jest matcher](https://jestjs.io/docs/en/using-matchers) I could use, or some [DOM manipulation](https://jestjs.io/docs/en/tutorial-jquery) I could do.
+
+I noticed that [others have had the same issue](https://github.com/Code-Pop/Unit-Testing/issues/1):
+
+> I've even added a line to display `<MessageDisplay />` in the `AppHeader.vue` to make sure the `json-server` is up and running.
+
+- Mounting the `AppHeader` instead doesn't fix the issue: `const wrapper = mount(AppHeader)`
+- Using `shallowMount()` instead doesn't fix the issue: `const wrapper = shallowMount(MessageDisplay)`
+- Importing `MessageDisplay` directly in _App.vue_, instead of in _AppHeader.vue_ doesn't fix the issue:
+
+  ```vue
+  <template>
+    <div id="app">
+      <app-header />
+      <message-display />
+      <div id="nav">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </div>
+      <router-view />
+    </div>
+  </template>
+
+  <script>
+  import AppHeader from "@/components/AppHeader"
+  import MessageDisplay from "@/components/MessageDisplay.vue"
+  export default {
+    components: {
+      AppHeader,
+      MessageDisplay,
+    },
+  }
+  </script>
+
+  <style></style>
+  ```
+
+- Doesn't appear due to some difference between `mockResolvedValueOnce` and `mockRejectedValueOnce`
+- In _src/components/MessageDisplay.vue_, the error element is only displayed `v-if` Vue has an `error` in its `data()`. By default, we have set `error: null`.
+
+  ```vue
+  <template>
+    <p v-if="error" data-testid="message-error">{{ error }}</p>
+    <p v-else data-testid="message">{{ message.text }}</p>
+  </template>
+
+  <script>
+  import { getMessage } from "@/services/axios.js"
+  export default {
+    data() {
+      return {
+        message: {},
+        error: null,
+      }
+    },
+    async created() {
+      try {
+        this.message = await getMessage()
+      } catch (err) {
+        this.error = "Oops! Something went wrong."
+      }
+    },
+  }
+  </script>
+  ```
+
+- As we did in _AppHeader.spec.js_, we can `setData()` when mounting the component, but this doesn't fix the issue.
+- **The error seems to have something to do with mounting _MessageDisplay.vue_. I could never figure out what was causing the error, and it mysteriously resolved in both [my repo](https://github.com/br3ndonland/vue-mastery-testing-app) as well as the Vue Mastery repo, so I just moved on.**
 
 ## 6. Stubbing Child Components
 
