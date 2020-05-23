@@ -32,6 +32,9 @@
   - [Refactoring](#refactoring)
   - [Upgrading Vue Test Utils](#upgrading-vue-test-utils)
 - [6. Stubbing Child Components](#6-stubbing-child-components)
+  - [Stubbing](#stubbing)
+  - [`mount()` vs `shallowMount()`](#mount-vs-shallowmount)
+  - [Avoiding use of strings for stubs](#avoiding-use-of-strings-for-stubs)
 - [7. Testing Vuex](#7-testing-vuex)
 - [8. Testing Vue Router](#8-testing-vue-router)
 
@@ -509,6 +512,8 @@ Vue Test Utils 1.0 is [here](https://github.com/vuejs/vue-test-utils/releases). 
 
 ## 6. Stubbing Child Components
 
+### Stubbing
+
 A **stub** is a substitute version of a component for testing. Advantages:
 
 - Isolate what you're testing
@@ -519,7 +524,47 @@ This concept is similar to [Jest manual mocks](https://jestjs.io/docs/en/manual-
 
 Stubs should be used sparingly. Overuse of stubs increases the maintenance cost of your tests, because you depend on manually written stubs.
 
+### `mount()` vs `shallowMount()`
+
 In addition to `mount()`, Jest also offers a `shallowMount()` method, which only mounts the component being tested without the rest of the component hierarchy. Use of `shallowMount()` can have the same disadvantages as overuse of stubs, and is not always supported in other libraries like [Vue Testing Library](https://testing-library.com/docs/vue-testing-library/intro). Vue Testing Library [favors](https://testing-library.com/docs/guiding-principles) testing DOM nodes over isolated components. For more about `mount()` vs `shallowMount()`, listen to the [Enjoy the Vue podcast episode 9](https://enjoythevue.io/episodes/9/).
+
+### Avoiding use of strings for stubs
+
+Vue Test Utils now throws the following warning:
+
+```
+[vue-test-utils]: Using a string for stubs is deprecated and will be removed in the next major version.
+```
+
+Confusingly, the solution is not in the [Vue Test Utils docs on stubbing components](https://vue-test-utils.vuejs.org/guides/#stubbing-components), but actually in the [Vue Test Utils docs on the `mount()` API](https://vue-test-utils.vuejs.org/api/#mount). The solution, based on the [example in the docs](https://vue-test-utils.vuejs.org/api/#mount) and on [what Vue Test Utils currently does](https://github.com/vuejs/vue-test-utils/blob/v1.0.3/packages/create-instance/create-component-stubs.js#L161), is to create a new object for the stub, and add the HTML string to the template key:
+
+```js
+// tests/unit/MessageContainer.spec.js
+import MessageContainer from "@/components/MessageContainer"
+import { mount } from "@vue/test-utils"
+
+describe("MessageContainer", () => {
+  it("Wraps MessageDisplay component", () => {
+    /* old:
+    const wrapper = mount(MessageContainer, {
+      stubs: {
+        MessageDisplay: '<p data-testid="message">Hello from the db!</p>',
+      },
+    })
+    */
+    const stubMessage = "Hello from the db!"
+    const wrapper = mount(MessageContainer, {
+      stubs: {
+        MessageDisplay: {
+          template: `<p data-testid="message">${stubMessage}</p>`,
+        },
+      },
+    })
+    const message = wrapper.find('[data-testid="message"]').element.textContent
+    expect(message).toEqual(stubMessage)
+  })
+})
+```
 
 ## 7. Testing Vuex
 
