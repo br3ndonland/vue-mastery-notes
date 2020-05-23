@@ -30,10 +30,12 @@
   - [Asserting `expect()`ed outcomes](#asserting-expected-outcomes)
   - [Getting the correct number of API calls by clearing mocks](#getting-the-correct-number-of-api-calls-by-clearing-mocks)
   - [Refactoring](#refactoring)
-  - [Upgrading Vue Test Utils](#upgrading-vue-test-utils)
 - [6. Stubbing Child Components](#6-stubbing-child-components)
   - [Stubbing](#stubbing)
   - [`mount()` vs `shallowMount()`](#mount-vs-shallowmount)
+  - [Upgrading Vue Test Utils](#upgrading-vue-test-utils)
+  - [Removing `nextTick()` and `await`ing DOM methods instead](#removing-nexttick-and-awaiting-dom-methods-instead)
+  - [Correcting the `isVisible()` deprecation warning](#correcting-the-isvisible-deprecation-warning)
   - [Avoiding use of strings for stubs](#avoiding-use-of-strings-for-stubs)
 - [7. Testing Vuex](#7-testing-vuex)
 - [8. Testing Vue Router](#8-testing-vue-router)
@@ -456,60 +458,6 @@ I noticed that [others have had the same issue](https://github.com/Code-Pop/Unit
 - As we did in _AppHeader.spec.js_, we can `setData()` when mounting the component, but this doesn't fix the issue.
 - **The error seems to have something to do with mounting _MessageDisplay.vue_. I could never figure out what was causing the error, and it mysteriously resolved in both [my repo](https://github.com/br3ndonland/vue-mastery-testing-app) as well as the Vue Mastery repo, so I just moved on.**
 
-### Upgrading Vue Test Utils
-
-Vue Test Utils 1.0 is [here](https://github.com/vuejs/vue-test-utils/releases). There were a couple of updates to make to the tests after upgrading Vue Test Utils.
-
-- Remove `nextTick()` and await DOM methods instead (easy):
-
-  ```js
-  // before
-  wrapper.trigger("click")
-  await wrapper.vm.$nextTick()
-
-  // after
-  await wrapper.trigger("click")
-  ```
-
-- Correct `isVisible()` deprecation warning (not easy):
-
-  - Warning:
-
-    ```
-    [vue-test-utils]: isVisible is deprecated and will be removed in the next major version.
-    Consider a custom matcher such as those provided in jest-dom: https://github.com/testing-library/jest-dom#tobevisible.
-    When using with findComponent, access the DOM element with findComponent(Comp).element.
-    ```
-
-  - Solution:
-
-    - Import [jest-dom](https://github.com/testing-library/jest-dom): `import { toBeVisible } from "@testing-library/jest-dom/matchers"`
-    - [Extend `expect()`](https://jestjs.io/docs/en/expect#expectextendmatchers) with `toBeVisible()` from jest-dom: `expect.extend({ toBeVisible })`
-    - Update Jest tests to use `toBeVisible()` instead of `isVisible()`:
-
-      ```js
-      import { mount } from "@vue/test-utils"
-      import { toBeVisible } from "@testing-library/jest-dom/matchers"
-      import AppHeader from "@/components/AppHeader"
-
-      expect.extend({ toBeVisible })
-
-      describe("AppHeader", () => {
-        it("shows the logout button if user is logged in", async () => {
-          const wrapper = mount(AppHeader)
-          await wrapper.setData({ loggedIn: true })
-          // expect(wrapper.find("button").isVisible()).toBe(true)
-          expect(wrapper.find("button").element).toBeVisible()
-        })
-        it("doesn't show logout button if user is not logged in", async () => {
-          const wrapper = mount(AppHeader)
-          // loggedIn is false, so we don't have to use setData()
-          // expect(wrapper.find("button").isVisible()).toBe(false)
-          expect(wrapper.find("button").element).not.toBeVisible()
-        })
-      })
-      ```
-
 ## 6. Stubbing Child Components
 
 ### Stubbing
@@ -527,6 +475,62 @@ Stubs should be used sparingly. Overuse of stubs increases the maintenance cost 
 ### `mount()` vs `shallowMount()`
 
 In addition to `mount()`, Jest also offers a `shallowMount()` method, which only mounts the component being tested without the rest of the component hierarchy. Use of `shallowMount()` can have the same disadvantages as overuse of stubs, and is not always supported in other libraries like [Vue Testing Library](https://testing-library.com/docs/vue-testing-library/intro). Vue Testing Library [favors](https://testing-library.com/docs/guiding-principles) testing DOM nodes over isolated components. For more about `mount()` vs `shallowMount()`, listen to the [Enjoy the Vue podcast episode 9](https://enjoythevue.io/episodes/9/).
+
+### Upgrading Vue Test Utils
+
+Vue Test Utils 1.0 is [here](https://github.com/vuejs/vue-test-utils/releases). There were a couple of updates to make to the tests after upgrading Vue Test Utils.
+
+### Removing `nextTick()` and `await`ing DOM methods instead
+
+```js
+// before
+wrapper.trigger("click")
+await wrapper.vm.$nextTick()
+
+// after
+await wrapper.trigger("click")
+```
+
+### Correcting the `isVisible()` deprecation warning
+
+Warning:
+
+```
+[vue-test-utils]: isVisible is deprecated and will be removed in the next major version.
+Consider a custom matcher such as those provided in jest-dom: https://github.com/testing-library/jest-dom#tobevisible.
+When using with findComponent, access the DOM element with findComponent(Comp).element.
+```
+
+Solution:
+
+- Import [jest-dom](https://github.com/testing-library/jest-dom): `import { toBeVisible } from "@testing-library/jest-dom/matchers"`
+- [Extend `expect()`](https://jestjs.io/docs/en/expect#expectextendmatchers) with `toBeVisible()` from jest-dom: `expect.extend({ toBeVisible })`
+- Update Jest tests to use `toBeVisible()` instead of `isVisible()`:
+
+  ```js
+  import { mount } from "@vue/test-utils"
+  import { toBeVisible } from "@testing-library/jest-dom/matchers"
+  import AppHeader from "@/components/AppHeader"
+
+  expect.extend({ toBeVisible })
+
+  describe("AppHeader", () => {
+    it("shows the logout button if user is logged in", async () => {
+      const wrapper = mount(AppHeader)
+      await wrapper.setData({ loggedIn: true })
+      // expect(wrapper.find("button").isVisible()).toBe(true)
+      expect(wrapper.find("button").element).toBeVisible()
+    })
+    it("doesn't show logout button if user is not logged in", async () => {
+      const wrapper = mount(AppHeader)
+      // loggedIn is false, so we don't have to use setData()
+      // expect(wrapper.find("button").isVisible()).toBe(false)
+      expect(wrapper.find("button").element).not.toBeVisible()
+    })
+  })
+  ```
+
+- See [vue-test-utils#1532](https://github.com/vuejs/vue-test-utils/issues/1532) for more details.
 
 ### Avoiding use of strings for stubs
 
