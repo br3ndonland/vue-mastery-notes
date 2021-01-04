@@ -1,8 +1,8 @@
-# Vue 3 Essentials
+# Vue 3 Composition API
 
 [Vue Mastery](https://www.vuemastery.com)
 
-[Vue 3 Essentials](https://www.vuemastery.com/courses/vue-3-essentials)
+~~[Vue 3 Essentials](https://www.vuemastery.com/courses/vue-3-essentials)~~ [Vue 3 Composition API course](https://www.vuemastery.com/courses/vue-3-essentials/why-the-composition-api)
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -24,6 +24,8 @@
 - [9. Sharing State](#9-sharing-state)
   - [Single-file app](#single-file-app)
   - [Refactoring with the Composition API](#refactoring-with-the-composition-api)
+- [10. Suspense (new)](#10-suspense-new)
+- [11. Teleport (new)](#11-teleport-new)
 
 ## 1. Why the Composition API
 
@@ -531,6 +533,10 @@ export default {
 > It looks like Vue 2 with the composition API isn’t properly recognizing my Reactive References and calling .value like it should. I could fix this by adding .value manually orr by actually using Vue 3. I tested the code with Vue 3 and sure enough, it saw the Reactive References and properly displayed the .value.
 
 _Note that the code above is updated without destructuring as recommended._
+
+## 10. Suspense (new)
+
+## 11. Teleport (new)
 
 **COURSE COMPLETE!!! I RULE!!!**
 
