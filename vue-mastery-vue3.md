@@ -551,6 +551,17 @@ _Note that the code above is updated without destructuring as recommended._
 
 ## 11. Teleport (new)
 
+- `Teleport` allows HTML to be sent to another part of the DOM.
+  ```vue
+  <template>
+    <teleport to=".someClass">
+    <teleport to="[data-selector]">
+    <teleport :to="reactiveProperty">
+  </template>
+  ```
+- If a destination component is disabled (like a modal), the HTML will be retained in the original component until the destination component is enabled. Once the destination component is enabled, the existing state of the original component is retained.
+- See the [Vue 3 teleport docs](https://v3.vuejs.org/guide/teleport.html).
+
 **COURSE COMPLETE!!! I RULE!!!**
 
 <img src="img/vm-vue3-complete.png" alt="Vue Mastery Vue 3 course completion page" width="600px" />
