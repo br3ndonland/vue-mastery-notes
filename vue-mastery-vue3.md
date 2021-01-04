@@ -565,3 +565,7 @@ _Note that the code above is updated without destructuring as recommended._
 **COURSE COMPLETE!!! I RULE!!!**
 
 <img src="img/vm-vue3-complete.png" alt="Vue Mastery Vue 3 course completion page" width="600px" />
+
+**COURSE COMPLETE AGAIN!!! I STILL RULE!!!**
+
+<img src="img/vm-vue3-complete-again.png" alt="Vue Mastery Vue 3 course completion page" width="600px" />
