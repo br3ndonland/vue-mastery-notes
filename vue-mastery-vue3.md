@@ -536,6 +536,19 @@ _Note that the code above is updated without destructuring as recommended._
 
 ## 10. Suspense (new)
 
+- `Suspense` allows Vue to wait for async data before loading a component. It can replace use of Vuex for loading status.
+  ```vue
+  <template>
+    <Suspense>
+      <template #default>Components that make asychronous API calls</template>
+      <template #fallback>What to display when loading</template>
+    </Suspense>
+  </template>
+  ```
+- This is particularly powerful for components with multiple async API calls, or deeply nested components that make API calls. `Suspense` will wait until all API calls are resolved.
+- See [CSS-Tricks](https://css-tricks.com/building-skeleton-screens-css-custom-properties/) for more about "skeleton screens" to display while loading.
+- See the [Vue 3 docs on dynamic and async components](https://v3.vuejs.org/guide/component-dynamic-async.html).
+
 ## 11. Teleport (new)
 
 **COURSE COMPLETE!!! I RULE!!!**
