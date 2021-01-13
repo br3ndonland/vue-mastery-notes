@@ -44,6 +44,79 @@
 
 ## 3. User Registration
 
+- We create a registration component, _RegisterUser.vue_, in which users can register with name, email, and password `<input>` form fields. The inputs are dispatched to Vuex.
+- Vuex `POST`s the credentials to the back-end server using the `/register` API endpoint.
+- On the back-end, the [Auth0 `jsonwebtoken` package](https://github.com/auth0/node-jsonwebtoken) is used to generate a JWT.
+
+  ```js
+  const jwt = require("jsonwebtoken")
+
+  app.post("/register", (req, res) => {
+    if (req.body) {
+      const user = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        // You'll want to encrypt the password in a live app
+      }
+
+      const data = JSON.stringify(user, null, 2)
+
+      fs.writeFile("db/user.json", data, (err) => {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log("Added user to user.json")
+        }
+      })
+      // The secret key should be an environment variable in a live app
+      const token = jwt.sign({ user }, "the_secret_key")
+      res.json({
+        token,
+        email: user.email,
+        name: user.name,
+      })
+    } else {
+      res.sendStatus(401)
+    }
+  })
+  ```
+
+- Vuex then receives the token from the back-end, stores it in local storage, and sets it as an Axios default header.
+
+  ```js
+  import Vue from "vue"
+  import Vuex from "vuex"
+  import axios from "axios"
+
+  Vue.use(Vuex)
+
+  export default new Vuex.Store({
+    state: {
+      user: null
+    },
+    mutations: {
+      SET_USER_DATA(state, userData) {
+        localStorage.setItem("user", JSON.stringify(userData))
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${userData.token}`
+        state.user = userData
+      },
+    actions: {
+      register({ commit }, credentials) {
+        return axios
+          .post("//localhost:3000/register", credentials)
+          .then(({ data }) => {
+            commit("SET_USER_DATA", data)
+          })
+      },
+    }
+  })
+  ```
+
+- After successful registration, _RegisterUser.vue_ will redirect new users to the dashboard with `this.$router.push({ name: "dashboard" })`.
+
 ## 4. User Login
 
 ## 5. User Logout
