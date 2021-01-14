@@ -119,6 +119,71 @@
 
 ## 4. User Login
 
+- Add a component for login, _LoginUser.vue_, with router links.
+- Handle login with Vuex, in a similar manner to registration.
+
+  ```js
+  import Vue from "vue"
+  import Vuex from "vuex"
+  import axios from "axios"
+
+  Vue.use(Vuex)
+
+  export default new Vuex.Store({
+    state: {
+      user: null
+    },
+    mutations: {
+      SET_USER_DATA(state, userData) {
+        localStorage.setItem("user", JSON.stringify(userData))
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${userData.token}`
+        state.user = userData
+      },
+    actions: {
+      register({ commit }, credentials) {
+        return axios
+          .post("//localhost:3000/register", credentials)
+          .then(({ data }) => {
+            commit("SET_USER_DATA", data)
+          })
+      },
+      login({ commit }, credentials) {
+        return axios
+          .post("//localhost:3000/login", credentials)
+          .then(({ data }) => {
+            commit("SET_USER_DATA", data)
+          })
+      },
+    }
+  })
+  ```
+
+- The back-end code for handling login is also quite similar to the code for registration.
+
+  ```js
+  app.post("/login", (req, res) => {
+    var userDB = fs.readFileSync("./db/user.json")
+    var userInfo = JSON.parse(userDB)
+    if (
+      req.body &&
+      req.body.email === userInfo.email &&
+      req.body.password === userInfo.password
+    ) {
+      // The secret key should be an environment variable in a live app
+      const token = jwt.sign({ userInfo }, "the_secret_key")
+      res.json({
+        token,
+        email: userInfo.email,
+        name: userInfo.name,
+      })
+    } else {
+      res.sendStatus(401)
+    }
+  })
+  ```
+
 ## 5. User Logout
 
 ## 6. Handling Errors
