@@ -186,6 +186,101 @@
 
 ## 5. User Logout
 
+- Add a logout button
+- Clear user data and force a refresh with the [`location.reload()` web API](https://developer.mozilla.org/en-US/docs/Web/API/Location/reload).
+
+  ```js
+  import Vue from "vue"
+  import Vuex from "vuex"
+  import axios from "axios"
+
+  Vue.use(Vuex)
+
+  export default new Vuex.Store({
+    state: {
+      user: null
+    },
+    mutations: {
+      SET_USER_DATA(state, userData) {
+        localStorage.setItem("user", JSON.stringify(userData))
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${userData.token}`
+        state.user = userData
+      },
+      LOGOUT() {
+        localStorage.removeItem("user")
+        location.reload()
+    },
+    actions: {
+      register({ commit }, credentials) {
+        return axios
+          .post("//localhost:3000/register", credentials)
+          .then(({ data }) => {
+            commit("SET_USER_DATA", data)
+          })
+      },
+      login({ commit }, credentials) {
+        return axios
+          .post("//localhost:3000/login", credentials)
+          .then(({ data }) => {
+            commit("SET_USER_DATA", data)
+          })
+      },
+      logout({ commit }) {
+        commit("LOGOUT")
+      },
+    }
+  })
+  ```
+
+- Redirect with Vue Router. Initally, the instructor uses [route `Meta` fields](https://router.vuejs.org/guide/advanced/meta.html) to add custom attributes to the routes.
+
+  ```js
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: Dashboard,
+    meta: { requiresAuth: true }
+  },
+  ```
+
+- Next, they add route guards with `router.beforeEach`.
+
+  ```js
+  router.beforeEach((to, from, next) => {
+    const loggedIn = localStorage.getItem("user")
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+      if (!loggedIn) {
+        next("/")
+        return
+      }
+      next()
+    }
+    next()
+  })
+  ```
+
+- Another way to do it is to specify the public routes in an array, rather than individually specifying restricted routes. If a user attempts to navigate to a restricted route, they are redirected to the authentication page instead.
+
+  ```js
+  router.beforeEach((to, from, next) => {
+    const publicPages = ["/authenticate", "/"]
+    const authRequired = !publicPages.includes(to.path)
+    const loggedIn = localStorage.getItem("user")
+    if (authRequired && !loggedIn) {
+      return next("/authenticate")
+    }
+    next()
+  })
+  ```
+
+- Finally, the dashboard route is only shown if the user is logged in.
+
+  ```html
+  <router-link v-if="loggedIn" to="/dashboard"> Dashboard </router-link>
+  ```
+
 ## 6. Handling Errors
 
 ## 7. Automatic Login
