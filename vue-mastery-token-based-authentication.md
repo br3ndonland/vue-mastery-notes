@@ -283,4 +283,10 @@
 
 ## 6. Handling Errors
 
+- _What if a user attempts to register with an email that is already registered?_
+- _What if a user attempts to register with an invalid password?_
+- _What if a user attempts to log in with invalid credentials?_
+- These errors are mostly handled by the server. If the server encounters an error, it should return an error code like HTTP `400` Bad request or `401` unauthorized.
+- On the front-end, errors from the server can be caught and console logged or displayed in the UI.
+
 ## 7. Automatic Login
