@@ -290,3 +290,45 @@
 - On the front-end, errors from the server can be caught and console logged or displayed in the UI.
 
 ## 7. Automatic Login
+
+- Use a `created` [lifecycle hook](https://vuejs.org/v2/api/#Options-Lifecycle-Hooks) with an [Axios interceptor](https://github.com/axios/axios#interceptors) to check for login info when the app is loaded.
+
+  ```js
+  import Vue from "vue"
+  import App from "./App.vue"
+  import router from "./router"
+  import store from "./store"
+  import axios from "axios"
+
+  Vue.config.productionTip = false
+
+  new Vue({
+    router,
+    store,
+    created() {
+      const userString = localStorage.getItem("user")
+      if (userString) {
+        const userData = JSON.parse(userString)
+        this.$store.commit("SET_USER_DATA", userData)
+      }
+      axios.interceptors.response.use(
+        (response) => response,
+        (error) => {
+          console.log(error.response)
+          if (error.response.status === 401) {
+            this.$router.push("/")
+            this.$store.dispatch("logout")
+          }
+          return Promise.reject(error)
+        }
+      )
+    },
+    render: (h) => h(App),
+  }).$mount("#app")
+  ```
+
+- The Axios interceptor also helps prevent malicious actors from creating fake tokens. If an incorrect token is stored in the browser, and the malicious actor attempts to use it, the app will reject their request and ask them to log in.
+
+**COURSE COMPLETE!!! I RULE!!!**
+
+<img src="img/vm-token-based-authentication-complete.png" alt="Vue Mastery token-based authentication course completion page" width="600px" />
