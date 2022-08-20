@@ -8,11 +8,11 @@
 
 - [1. Intro to Vuex](#1-intro-to-vuex)
 - [2. Mastering Vuex Orientation](#2-mastering-vuex-orientation)
-- [3. State & Getters](#3-state--getters)
-- [4. Mutations & Actions Pt.1](#4-mutations--actions-pt1)
-- [5. Mutations & Actions Pt.2](#5-mutations--actions-pt2)
+- [3. State \& Getters](#3-state--getters)
+- [4. Mutations \& Actions Pt.1](#4-mutations--actions-pt1)
+- [5. Mutations \& Actions Pt.2](#5-mutations--actions-pt2)
 - [6. Modules](#6-modules)
-- [7. Success & Error Notifications](#7-success--error-notifications)
+- [7. Success \& Error Notifications](#7-success--error-notifications)
 
 ## 1. Intro to Vuex
 
@@ -181,7 +181,7 @@ Key concepts, as introduced in [1. Intro to Vuex](#1-Intro-to-Vuex):
 
 - Mutations update, or mutate, state.
 - Actions commit mutations, which update state.
-- **Mutations should always go within actions.** This improves scaleability.
+- **Mutations should always go within actions.** This improves scalability.
 - **Mutations are synchronous. Actions are asynchronous.**
 - Mutation names are written in uppercase, like `MUTATION_NAME`.
 - Pseudocode example: asking a friend to get bread. The request is like a mutation, the action is actually getting the bread.

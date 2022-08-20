@@ -234,7 +234,7 @@
   })
   ```
 
-- Redirect with Vue Router. Initally, the instructor uses [route `Meta` fields](https://router.vuejs.org/guide/advanced/meta.html) to add custom attributes to the routes.
+- Redirect with Vue Router. Initially, the instructor uses [route `Meta` fields](https://router.vuejs.org/guide/advanced/meta.html) to add custom attributes to the routes.
 
   ```js
   {
