@@ -44,10 +44,33 @@
 
 ### Overview
 
-- Script blocks will now look like `<script lang="ts"></script>`
-- A helper function import is needed: `import { defineComponent } from "vue"`
-- `defineComponent` will then be used to construct `export` objects: `export default defineComponent({ ... })`
+- Script blocks need `lang="ts"`, like `<script lang="ts"></script>`.
+- The [`defineComponent` helper method](https://vuejs.org/guide/typescript/overview.html#definecomponent) needs to be imported: `import { defineComponent } from "vue"`
+- `export` objects need to be constructed with the `defineComponent` helper method, rather than just `export default {}`: `export default defineComponent({ ... })`
 - See the [Real-World-Vue-3-TypeScript](https://github.com/Code-Pop/Real-World-Vue-3-TypeScript) repo for a practical example.
+- Also see the [example in the Vue docs](https://vuejs.org/guide/typescript/overview.html#definecomponent):
+
+  ```ts
+  import { defineComponent } from "vue"
+
+  export default defineComponent({
+    // type inference enabled
+    props: {
+      name: String,
+      msg: { type: String, required: true },
+    },
+    data() {
+      return {
+        count: 1,
+      }
+    },
+    mounted() {
+      this.name // type: string | undefined
+      this.msg // type: string
+      this.count // type: number
+    },
+  })
+  ```
 
 ### Path aliases with Vue.js and TypeScript
 
