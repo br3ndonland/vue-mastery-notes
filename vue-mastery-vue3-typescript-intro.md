@@ -150,6 +150,67 @@ See the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/typescrip
 
 ## 7. Props with Types
 
+Vue allows [prop types](https://vuejs.org/guide/components/props.html#prop-validation) to be specified and validated when using object syntax:
+
+```js
+export default {
+  props: {
+    event: {
+      type: Object,
+      required: true,
+    },
+  },
+}
+```
+
+The type `Object` is not very specific. TypeScript allows us to define more specific and custom types. Vue supports [typing props with TypeScript](https://vuejs.org/guide/typescript/options-api.html#typing-component-props).
+
+It's not quite as simple as just importing a type and replacing `Object` with the type. TypeScript types are specific to TypeScript. To use TypeScript types to specify Vue.js prop types, the `PropType` utility can be used.
+
+```ts
+import { defineComponent, PropType } from "vue"
+
+interface EventItem {
+  id: number
+  category: string
+  title: string
+  description: string
+  location: string
+  date: string
+  time: string
+  organizer: string
+}
+
+export default defineComponent({
+  props: {
+    event: {
+      type: Object as PropType<EventItem>,
+      required: true,
+    },
+  },
+})
+```
+
+The type within carets, like `<EventItem>`, is an example of [TypeScript generics](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html#generics). Generics are like variables for complex types.
+
+A function with generic types might look like this:
+
+```ts
+function createList<T>(item: T): T[] {
+  const newList: T[] = []
+
+  newList.push(item)
+
+  return newList
+}
+
+const stringList = createList<number>(123)
+```
+
+The generic type basically tells TypeScript that the function will accept a type, and then make an array of values with the type that was passed in. `createList<number>(123)` will create an array of numbers: `[1, 2, 3]`.
+
+While not particularly readable, the use of `T` to indicate a generic type is a common convention in other languages. For example, [Python uses this convention for type checking with mypy](https://mypy.readthedocs.io/en/latest/generics.html).
+
 ## 8. Computed & Methods with Custom Types
 
 ## 9. Next Steps
