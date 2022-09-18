@@ -193,21 +193,19 @@ export default defineComponent({
 
 The type within carets, like `<EventItem>`, is an example of [TypeScript generics](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html#generics). Generics are like variables for complex types.
 
-A function with generic types might look like this:
+A TypeScript function with generic types might look like this:
 
 ```ts
-function createList<T>(item: T): T[] {
-  const newList: T[] = []
-
-  newList.push(item)
-
-  return newList
+function createArray<T>(item: T): T[] {
+  const newArray: T[] = []
+  newArray.push(item)
+  return newArray
 }
 
-const stringList = createList<number>(123)
+const numberArray = createArray<number>(123)
 ```
 
-The generic type basically tells TypeScript that the function will accept a type, and then make an array of values with the type that was passed in. `createList<number>(123)` will create an array of numbers: `[1, 2, 3]`.
+The generic type basically tells TypeScript that the function will accept a type, and then make an array of values with the type that was passed in. `createArray<number>(123)` will create an array of numbers: `[1, 2, 3]`.
 
 While not particularly readable, the use of `T` to indicate a generic type is a common convention in other languages. For example, [Python uses this convention for type checking with mypy](https://mypy.readthedocs.io/en/latest/generics.html).
 
