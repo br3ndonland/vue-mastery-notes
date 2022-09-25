@@ -150,7 +150,7 @@ See the [TypeScript docs "TypeScript in 5 minutes" tutorial](https://www.typescr
 ## 6. Data with Custom Types
 
 - There is a [VueDX](https://github.com/vuedx/languagetools) VSCode extension that can help with types.
-- Types can be centralized in a single file, like `src/types.ts`.
+- Types can be centralized in a single file, called a "[declaration file](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html)," like `src/types.d.ts`.
 
 ## 7. Props with Types
 
