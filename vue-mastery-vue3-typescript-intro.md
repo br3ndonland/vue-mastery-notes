@@ -18,6 +18,8 @@
 - [6. Data with Custom Types](#6-data-with-custom-types)
 - [7. Props with Types](#7-props-with-types)
 - [8. Computed \& Methods with Custom Types](#8-computed--methods-with-custom-types)
+  - [Computed properties](#computed-properties)
+  - [Methods](#methods)
 - [9. Next Steps](#9-next-steps)
 - [10. Bonus: Composition API with TypeScript](#10-bonus-composition-api-with-typescript)
 
@@ -210,6 +212,78 @@ The generic type basically tells TypeScript that the function will accept a type
 While not particularly readable, the use of `T` to indicate a generic type is a common convention in other languages. For example, [Python uses this convention for type checking with mypy](https://mypy.readthedocs.io/en/latest/generics.html).
 
 ## 8. Computed & Methods with Custom Types
+
+### Computed properties
+
+Computed properties are typed based on what is returned.
+
+```ts
+import { defineComponent } from "vue"
+
+interface EventItem {
+  id: number
+  category: string
+  title: string
+  description: string
+  location: string
+  date: string
+  time: string
+  organizer: string
+}
+
+export default defineComponent({
+  data() {
+    return {
+      events: [] as EventItem,
+    }
+  },
+  computed: {
+    secondEvent(): EventItem {
+      return this.events[1]
+    },
+  },
+})
+```
+
+### Methods
+
+Methods are typed based on function arguments (inputs) and return types.
+
+```ts
+import { defineComponent } from "vue"
+
+interface EventItem {
+  id: number
+  category: string
+  title: string
+  description: string
+  location: string
+  date: string
+  time: string
+  organizer: string
+}
+
+export default defineComponent({
+  data() {
+    return {
+      events: [] as EventItem,
+    }
+  },
+  computed: {
+    secondEvent(): EventItem {
+      return this.events[1]
+    },
+    methods: {
+      addEvent(newEvent: EventItem) {
+        this.events.push(newEvent)
+      },
+      secondEvent(): EventItem {
+        return this.events[1]
+      },
+    },
+  },
+})
+```
 
 ## 9. Next Steps
 
