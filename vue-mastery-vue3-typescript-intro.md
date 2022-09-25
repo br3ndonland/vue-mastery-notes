@@ -4,6 +4,8 @@
 
 [Intro to Vue 3 + TypeScript](https://www.vuemastery.com/courses/vue3-typescript)
 
+[Code on GitHub](https://github.com/Code-Pop/Real-World-Vue-3-TypeScript)
+
 ## Table of Contents <!-- omit in toc -->
 
 - [1. Why Vue \& TypeScript](#1-why-vue--typescript)
@@ -288,3 +290,56 @@ export default defineComponent({
 ## 9. Next Steps
 
 ## 10. Bonus: Composition API with TypeScript
+
+In this lesson, the instructor Ben Hong updates the demo app from the course to use [TypeScript with the Vue 3 Composition API](https://vuejs.org/guide/typescript/composition-api.html), instead of the original [Options API](https://vuejs.org/guide/typescript/options-api.html).
+
+- The `data()` object moves into a `reactive()` object within the `setup()` object
+- `toRefs(state)` is added in order to access state attributes
+- `computed` moves into `setup()`
+- `methods` move into `setup()`
+- Moving these methods inside `setup()` and adding return types can improve type inference. The [Vue 3 docs](https://vuejs.org/guide/typescript/options-api.html) explain, "While Vue does support TypeScript usage with Options API, it is recommended to use Vue with TypeScript via Composition API as it offers simpler, more efficient and more robust type inference."
+
+See the [code on GitHub](https://github.com/Code-Pop/Real-World-Vue-3-TypeScript/tree/10-end). For example, the `<script lang="ts">` section of `src/views/Todo.vue` looks like this:
+
+```ts
+import { computed, defineComponent, reactive, toRefs } from "vue"
+import { TodoItem } from "../types"
+
+export default defineComponent({
+  setup() {
+    const state = reactive({
+      newTask: {
+        label: "",
+        type: "personal",
+      } as TodoItem,
+      taskItems: [] as TodoItem[],
+      listFilter: "all",
+    })
+    const filteredTasks = computed(() => {
+      if (state.listFilter === "complete") {
+        return state.taskItems.filter(
+          (item: TodoItem) => item.isComplete === true
+        )
+      } else if (state.listFilter === "incomplete") {
+        return state.taskItems.filter(
+          (item: TodoItem) => item.isComplete === false
+        )
+      } else {
+        return state.taskItems
+      }
+    })
+    const addTask = () => {
+      state.taskItems.push({
+        ...state.newTask,
+        isComplete: false,
+      })
+    }
+    return {
+      ...toRefs(state),
+      addTask,
+      filteredTasks,
+    }
+  },
+})
+```
+
