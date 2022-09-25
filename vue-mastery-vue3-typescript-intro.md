@@ -343,3 +343,6 @@ export default defineComponent({
 })
 ```
 
+**COURSE COMPLETE!!! I RULE!!!**
+
+<img src="img/vue-mastery-vue3-typescript-intro-complete.png" alt="Vue Mastery Vue 3 and TypeScript course completion page" width="600px" />
