@@ -108,7 +108,7 @@ Note that TypeScript must be configured to handle aliases.
 - TypeScript adds types:
   - Tuple (like an array, but with predefined length)
   - Enum (set "friendly names" for values)
-- Simple types are added to variables like `isComplete: boolean = false`. Note that type names are lowercase in this syntax.
+- Simple types are added to variables like `isComplete: boolean = false`. Note that type names are lowercase in this syntax. Also note that, for this type, the default value is `false`.
 - Complex types like arrays need to define not only the data type, but which data types it should contain. An array of strings might be defined like `let shoppingList: string[] = ["eggs", "kale", "sweet potatoes"]`.
 - Functions have types in a couple of places:
   - Function parameters (arguments)
@@ -131,21 +131,21 @@ type ButtonType = "primary" | "secondary" | "success" | "danger"
 
 ### interface
 
-An `interface` is like a type for an object.
+An `interface` is like a type for an object. Each object attribute can have a type. To make a field optional (allowing either the given type or `undefined`), add `?`, like `age?: number`. To set a default value, use `=` and then the value, like `activeAvenger: boolean = true`.
 
 ```ts
 type ComicUniverse = "Marvel" | "DC"
 
 interface Hero {
   name: string
-  age: number
-  activeAvenger: boolean
+  age?: number
+  activeAvenger: boolean = true
   powers: string[]
   universe: ComicUniverse
 }
 ```
 
-See the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html) for more info.
+See the [TypeScript docs "TypeScript in 5 minutes" tutorial](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html) and the [TypeScript docs on optional parameters](https://www.typescriptlang.org/docs/handbook/2/functions.html#optional-parameters) for more info.
 
 ## 6. Data with Custom Types
 
