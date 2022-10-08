@@ -31,7 +31,24 @@ SSR apps render pages on the server, send the pages to the client right away for
 
 ## 2. Installation and Configuration
 
+- Initialize a new Nuxt 3 app using the instructions at [v3.nuxtjs.org](https://v3.nuxtjs.org/getting-started/installation). The command for [pnpm](https://pnpm.io/) is `pnpm dlx nuxi init <directory_name>`.
+- Install the dependencies for the Nuxt 3 app with `pnpm install --shamefully-hoist` in the `nuxt-app` directory.
+- Run the dev server with `pnpm dev`.
+- [Layouts](https://v3.nuxtjs.org/guide/directory-structure/layouts) will go in the layouts directory.
+- [Pages](https://v3.nuxtjs.org/guide/directory-structure/pages) will go in the pages directory.
+
 ## 3. Creating the URL Structure For Pages
+
+We will create a site to display info about cryptocurrencies using the [Coinlore](https://www.coinlore.com/) API with two pages:
+
+1. Landing page showing all currencies
+2. Detail page for each currency, created with dynamic routing
+
+To start, we need to set up the pages directory, overriding the default `app.vue` as described in the [docs](https://v3.nuxtjs.org/guide/directory-structure/pages).
+
+- Create `pages/index.vue`
+- Override `app.vue` by adding `<NuxtPage/>` to the `<template>` in `app.vue`
+- Create the currency details page file at `pages/currency/[id].vue`
 
 ## 4. Custom Layout and Landing Page Content
 
