@@ -4,6 +4,8 @@
 
 [Nuxt 3 Essentials](https://www.vuemastery.com/courses/nuxt-3-essentials)
 
+[Code on GitHub](https://github.com/Code-Pop/Nuxt-3-Essentials)
+
 Instructor: Steve Edwards
 
 ## Table of Contents <!-- omit in toc -->
@@ -52,6 +54,90 @@ To start, we need to set up the pages directory, overriding the default `app.vue
 
 ## 4. Custom Layout and Landing Page Content
 
+- Create `layouts/default.vue` for the default [layout](https://v3.nuxtjs.org/guide/directory-structure/layouts). Use a [slot](https://vuejs.org/guide/components/slots.html) to indicate where the content will go.
+  ```vue
+  <template>
+    <nav>
+      <NuxtLink to="/">Home</NuxtLink>
+    </nav>
+    <main>
+      <slot />
+    </main>
+  </template>
+  ```
+- Create `server/api/[...].js`. This is a [catch-all route](https://v3.nuxtjs.org/guide/directory-structure/pages/#catch-all-route) using the [`$fetch` global helper](https://v3.nuxtjs.org/api/utils/dollarfetch) that will perform a request to the Coinlore API.
+  ```js
+  export default (request) => $fetch(`https://api.coinlore.net${request.url}`)
+  ```
+- Create the homepage in `pages/index.vue`. Note [`useFetch`](https://v3.nuxtjs.org/getting-started/data-fetching), which is a wrapper around the `$fetch` global helper.
+  ```vue
+  <template>
+    <main>
+      <h1>Index Page</h1>
+      <table border="1 px solid">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tr v-for="currency in data.data" :key="data.data.id">
+          <td>{{ currency.name }}</td>
+          <td>{{ currency.symbol }}</td>
+          <td>{{ currency.price_usd }}</td>
+          <td>
+            <NuxtLink :to="`/currency/${currency.id}`">{{
+              currency.id
+            }}</NuxtLink>
+          </td>
+        </tr>
+      </table>
+    </main>
+  </template>
+  <script setup>
+  const { data } = await useFetch("/api/tickers?limit=10")
+  </script>
+  ```
+
 ## 5. Creating the Detail Page
 
+- The Coinlore API provides details at `https://api.coinlore.net/api/ticker/?id={id}`. Each coin has an integer ID.
+- Create the details page at `pages/currency/[id].vue`.
+  ```vue
+  <template>
+    <div>
+      <h2>{{ coin.name }} Detail page</h2>
+      <table border="1 px solid">
+        <thead>
+          <th>Symbol</th>
+          <th>Rank</th>
+          <th>Price - US $</th>
+          <th>Market Cap - US $</th>
+        </thead>
+        <tr>
+          <td>{{ coin.symbol }}</td>
+          <td>{{ coin.rank }}</td>
+          <td>{{ coin.price_usd }}</td>
+          <td>{{ coin.market_cap_usd }}</td>
+        </tr>
+      </table>
+    </div>
+  </template>
+  <script setup>
+  const route = useRoute()
+  const { data } = await useFetch(`/api/ticker?id=${route.params.id}`)
+  const coin = data.value[0]
+  </script>
+  ```
+
 ## 6. Deployment
+
+- The instructor provides instructions for deploying to Netlify. See [Netlify](https://www.netlify.com/with/nuxt/) for more info.
+- There are several other platforms that support Nuxt, including Vercel. See the [Nuxt docs](https://nuxtjs.org/deployments/vercel/) and [Vercel](https://vercel.com/templates?framework=vue) for more info.
+- See the [Nuxt deployment docs](https://v3.nuxtjs.org/getting-started/deployment) for details on Nuxt 3 Nitro deployment presets.
+
+**COURSE COMPLETE!!! I RULE!!!**
+
+<img src="img/vue-mastery-nuxt3-essentials-complete.png" alt="Vue Mastery Nuxt 3 essentials course completion page" width="600px" />
