@@ -21,7 +21,7 @@ Instructor: Steve Edwards
 
 Nuxt 3 is a Vue.js framework that overcomes some limitations, including pre-configuration with sensible defaults, custom layouts, search engine optimization (SEO), and server-side rendering (SSR).
 
-The overview compares single-page apps (SPAs) vs. server-side rendered apps (SSR) vs. static sites. These concepts were also discussed in the [original Nuxt course](vue-mastery-nuxt.md).
+The overview compares single-page apps (SPAs) vs. server-side rendered apps (SSR) vs. static sites. These concepts were also discussed in the [original Nuxt course](vue-mastery-nuxt-2.md).
 
 SPAs require the client to render the JavaScript, and work like this:
 
