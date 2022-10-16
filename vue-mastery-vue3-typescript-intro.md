@@ -6,6 +6,8 @@
 
 [Code on GitHub](https://github.com/Code-Pop/Real-World-Vue-3-TypeScript)
 
+Instructor: Ben Hong
+
 ## Table of Contents <!-- omit in toc -->
 
 - [1. Why Vue \& TypeScript](#1-why-vue--typescript)
