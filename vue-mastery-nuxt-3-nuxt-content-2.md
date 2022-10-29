@@ -21,7 +21,39 @@ Instructor: Ben Hong
 
 ## 1. Introduction
 
+- [Nuxt Content](https://content.nuxtjs.org/) is a Nuxt plugin that reads Markdown, CSV, JSON, and YAML files.
+- The [Nuxt 3 `useHead` method](https://v3.nuxtjs.org/api/composables/use-head) allows us to add content to the HTML `<head>`.
+
 ## 2. Project Overview and Setup
+
+For this course, we will use the [code on GitHub](https://github.com/Code-Pop/build-a-blog-with-nuxt-3-and-nuxt-content-v2).
+
+For new projects, [get started with Nuxt Content](https://content.nuxtjs.org/get-started) by scaffolding from a template:
+
+```sh
+PROJECT_NAME="enter your project name here"
+pnpm dlx nuxi init $PROJECT_NAME -t content
+cd $PROJECT_NAME && pnpm install --shamefully-hoist
+pnpm run dev
+```
+
+[Nuxt Content configuration](https://content.nuxtjs.org/api/configuration) is defined in `nuxt.config.ts`. Note that `defineNuxtConfig` is now auto-imported. Remove import or alternatively use `import { defineNuxtConfig } from "nuxt/config"`.
+
+```ts
+// nuxt.config.ts: import `from "nuxt/config"`
+import { defineNuxtConfig } from "nuxt/config"
+
+export default defineNuxtConfig({
+  modules: ["@nuxt/content"],
+})
+```
+
+```ts
+// nuxt.config.ts: auto-import
+export default defineNuxtConfig({
+  modules: ["@nuxt/content"],
+})
+```
 
 ## 3. Creating Blog Posts with Markdown
 
