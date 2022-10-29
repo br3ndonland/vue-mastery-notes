@@ -2,7 +2,7 @@
 
 [Vue Mastery](https://www.vuemastery.com)
 
-~~[Vue 3 Essentials](https://www.vuemastery.com/courses/vue-3-essentials)~~ [Vue 3 Composition API course](https://www.vuemastery.com/courses/vue-3-essentials/why-the-composition-api)
+[Vue 3 Composition API course](https://www.vuemastery.com/courses/vue-3-essentials/why-the-composition-api)
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -10,7 +10,7 @@
   - [Readability suffers as components grow](#readability-suffers-as-components-grow)
   - [Code reuse patterns have drawbacks](#code-reuse-patterns-have-drawbacks)
   - [The composition API allows components to be organized by logical concerns](#the-composition-api-allows-components-to-be-organized-by-logical-concerns)
-- [2. Setup & Reactive References](#2-setup--reactive-references)
+- [2. Setup \& Reactive References](#2-setup--reactive-references)
   - [Setup](#setup)
   - [Reactive references](#reactive-references)
 - [3. Methods](#3-methods)
