@@ -293,6 +293,12 @@ export default defineComponent({
 
 ## 10. Bonus: Composition API with TypeScript
 
+The [Vue.js Composition API](https://vuejs.org/guide/extras/composition-api-faq.html) is a different way to write components. Rather than declaring options objects for Vue, the underlying Vue functions are imported and used instead.
+
+Packages like [VueUse](https://vueuse.org) can make it easier to work with the Composition API.
+
+See the [Vue 3 Composition API course notes](vue-mastery-vue-3-composition-api.md).
+
 In this lesson, the instructor Ben Hong updates the demo app from the course to use [TypeScript with the Vue 3 Composition API](https://vuejs.org/guide/typescript/composition-api.html), instead of the original [Options API](https://vuejs.org/guide/typescript/options-api.html).
 
 - The `data()` object moves into a `reactive()` object within the `setup()` object
