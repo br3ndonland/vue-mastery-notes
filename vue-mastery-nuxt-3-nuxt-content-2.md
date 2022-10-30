@@ -57,6 +57,11 @@ export default defineNuxtConfig({
 
 ## 3. Creating Blog Posts with Markdown
 
+- Content goes in the [`content/` directory](https://content.nuxtjs.org/guide/writing/content-directory).
+- Nuxt Content supports several types of content, including CSV, JSON, Markdown, and YAML.
+- Some files may have multiple types of content in them. For example, [Markdown files may have YAML front-matter](https://content.nuxtjs.org/guide/writing/markdown#front-matter) containing metadata about the file.
+- The instructor Ben walks through some instructions for converting HTML to Markdown. If you're new to Markdown, see the [Markdown guide](https://www.markdownguide.org/), the [GitHub docs](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax), and [Turndown](https://mixmark-io.github.io/turndown/), a site that will convert HTML to Markdown.
+
 ## 4. Using Vue Components in Markdown
 
 ## 5. Build the Blog Post List Component
